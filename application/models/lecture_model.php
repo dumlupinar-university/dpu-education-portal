@@ -27,9 +27,10 @@ class Lecture_model extends CI_Model {
 	{
 		$this->db->select('L.id, L.name, L.course , L.description');
 		$this->db->from('lectures as L');
-		$this->db->join('userscourses','userscourses.course = L.course','left'); 
+		$this->db->join('userscourses','L.course = userscourses.course','INNER'); 
 		$this->db->where('userscourses.user',$id);
 		$this->db->where('userscourses.course',$course);
+		$this->db->where('L.status',1);
 		
 		$query = $this->db->get();
 		
@@ -40,8 +41,8 @@ class Lecture_model extends CI_Model {
 		else
 		{
 			$this->db->select('L.id, L.name, L.course , L.description');
-			$this->db->from('lectures as L');
-			$this->db->join('courses','L.course = courses.id','left'); 
+			$this->db->from('lectures AS L');
+			$this->db->join('courses','L.course = courses.id','INNER'); 
 			$this->db->where('courses.teacher',$id);
 			$this->db->where('courses.id',$course);
 			
@@ -60,30 +61,34 @@ class Lecture_model extends CI_Model {
 	
 	function get_lecture($lectureid,$id)
 	{
-		$this->db->select('L.id, L.name, L.course , L.description , L.key');
-		$this->db->from('lectures as L');
-		$this->db->join('userscourses','userscourses.course = L.course'); 
+		$this->db->select('L.id AS idL, L.name AS nameL, L.course , L.description , L.key ,
+							C.name AS nameC ,C.id AS idC');
+		$this->db->from('lectures AS L , courses AS C');
+		$this->db->join('courses','L.course = courses.id','LEFT');
+		$this->db->join('userscourses','L.course = userscourses.course','INNER'); 
 		$this->db->where('userscourses.user',$id);
 		$this->db->where('L.id',$lectureid);
+		$this->db->where('L.status',1);
 		
 		$query = $this->db->get();
 		
-		if( $query->num_rows() == 1 )
+		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
 			return $row;
 		}
 		else
 		{
-			$this->db->select('L.id, L.name, L.course , L.description , L.key');
-			$this->db->from('lectures as L');
-			$this->db->join('courses','courses.id = L.course'); 
+			$this->db->select('L.id AS idL, L.name AS nameL, L.course , L.description , L.key ,
+							C.name AS nameC ,C.id AS idC');
+			$this->db->from('lectures AS L , courses AS C');
+			$this->db->join('courses','courses.id = L.course','INNER'); 
 			$this->db->where('courses.teacher',$id);
 			$this->db->where('L.id',$lectureid);
-		
+			
 			$query = $this->db->get();
-		
-			if( $query->num_rows() == 1 )
+			
+			if( $query->num_rows() > 0 )
 			{
 				$row = $query->row();
 				return $row;
@@ -94,6 +99,7 @@ class Lecture_model extends CI_Model {
 			}
 		}
 	}
+
 	
 	function check_lecture($course,$name)
 	{

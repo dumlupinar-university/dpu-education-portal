@@ -135,6 +135,7 @@ class Course_model extends CI_Model {
 		$this->db->from('courses');
 		$this->db->join('userscourses','userscourses.course = id','INNER');
 		$this->db->where('userscourses.user',$id);
+		$this->db->where('status',1);
 		
 		$query = $this->db->get();
 		
@@ -176,11 +177,30 @@ class Course_model extends CI_Model {
 		}
 	}
 	
+	function get_course_prizes($id)
+	{
+		$this->db->select('L.course , L.creditforthree, L.creditforsix, L.creditforyear');
+		$this->db->from('coursescredits AS L');
+		$this->db->where('L.course',$id);
+
+		$query = $this->db->get();
+
+		if( $query->num_rows() > 0 )
+		{
+			return $query->result();
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	function get_teacher_course_list($teacher)
 	{
 		$this->db->select('id, name');
 		$this->db->from('courses');
 		$this->db->where('teacher',$teacher);
+		$this->db->where('status',1);
 		
 		$query = $this->db->get();
 		
@@ -224,6 +244,40 @@ class Course_model extends CI_Model {
 			{
 				return 1;
 			}
+		}
+	}
+	
+	function get_course_credit($id,$validationDate)
+	{
+		if ( $validationDate == 3 )
+		{
+			$this->db->select('creditforthree');
+		}
+		else if ( $validationDate == 6 )
+		{
+			$this->db->select('creditforsix');
+		}
+		else if ( $validationDate == 12 )
+		{
+			$this->db->select('creditforyear');
+		}
+		else
+		{
+			return false;
+		}
+		
+		$this->db->from('coursescredits');
+		$this->db->where('course',$id);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() == 1 )
+		{
+			return $query->result();
+		}
+		else
+		{
+			return false;
 		}
 		
 	}

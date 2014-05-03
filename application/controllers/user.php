@@ -12,7 +12,9 @@ class User extends CI_Controller {
 	public function get_user($id)
 	{
 		$this->load->model('user_model','',TRUE);
+		
 		$userDetails["results"] = $this->user_model->get_user($id);
+		$userDetails["infos"] = $this->user_model->get_user_infos($id);
 		
 		$this->load->view('header');
 		
@@ -222,6 +224,7 @@ class User extends CI_Controller {
 			
 			$this->load->model('user_model','',TRUE);
 			$userDetails["results"] = $this->user_model->get_user($data['id']);
+			$userDetails["infos"] = $this->user_model->get_user_infos($data['id']);
 			
 			if ( $data['authority'] == 0 )
 			{
@@ -269,6 +272,7 @@ class User extends CI_Controller {
 			
 			$this->load->model('user_model','',TRUE);
 			$userDetails["results"] = $this->user_model->get_user($data['id']);
+			$userDetails["infos"] = $this->user_model->get_user_infos($data['id']);
 			
 			if ( $data['authority'] == 0 )
 			{
@@ -327,6 +331,51 @@ class User extends CI_Controller {
 		
 	}
 
+	function become_teacher()
+	{
+		$this->load->view('header');
+		$this->load->helper(array('form'));
+		
+		$this->load->view('header');
+		
+		if( $this->session->userdata('logged_in') )
+		{
+			$session_data = $this->session->userdata('logged_in');
+			
+			$data['authority'] = $session_data['authority'];
+			$data['name'] = $session_data['name'];
+			$data['surname'] = $session_data['surname'];
+			$data['id'] = $session_data['id'];
+			
+			
+			if ( $data['authority'] == 0 )
+			{
+				redirect('home','refresh');
+			}
+			else if ( $data['authority'] == 1 )
+			{
+				$this->load->view('menu_student');
+				$this->load->view('content_become_teacher',$data);
+			}
+			else if ( $data['authority'] == 2 )
+			{		
+				redirect('home','refresh');
+			}
+			else
+			{
+				$this->load->view('menu_admin');
+				$this->load->view('content_become_teacher',$data);
+			}
+			
+		}
+		else
+		{
+			redirect('home','refresh');
+		}
+		
+		$this->load->view('footer');
+		
+	}
 	
 }
 

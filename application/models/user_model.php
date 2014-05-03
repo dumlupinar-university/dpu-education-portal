@@ -97,6 +97,25 @@ class User_Model extends CI_Model {
 		}
 	}
 	
+	function get_user_infos($id)
+	{
+		$this->db->select('*');
+		$this->db->from('usersinfos');
+		$this->db->where('user',$id);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() == 1 )
+		{
+			$row = $query->row();
+			return $row;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	function get_teacher($id)
 	{
 		$this->db->select('*');
@@ -140,6 +159,24 @@ class User_Model extends CI_Model {
 			return false;
 		}
 		
+	}
+	
+	function get_user_credit($id)
+	{
+		$this->db->select('credit');
+		$this->db->from('userscredits');
+		$this->db->where('user',$id);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() > 0 )
+		{
+			return $query->result();
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
 

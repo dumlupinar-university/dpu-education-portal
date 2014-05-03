@@ -34,5 +34,5 @@
 				</tr>
 			</table>
 		</center>
-	</form>
+	<?php echo form_close();?>
 </div>

@@ -114,6 +114,7 @@ class Course extends CI_Controller {
 			$data['id'] = $session_data['id'];
 			
 			$courseDetails['status'] = $this->course_model->check_status($id,$data['id']);
+			$courseDetails['prizes'] = $this->course_model->get_course_prizes($id);
 			
 			if ( $data['authority'] == 0 )
 			{
@@ -181,6 +182,60 @@ class Course extends CI_Controller {
 			{
 				$this->load->view('menu_admin');
 				$this->load->view('content_courses',$data);
+			}
+			
+		}
+		else
+		{
+			$this->load->view('menu');
+			$this->load->view('content_courses',$data);
+		}
+		
+		$this->load->view('footer');
+	}
+	
+	function buy_course($id,$validationDate)
+	{
+		$this->load->model('course_model','',TRUE);
+		$this->load->model('user_model','',TRUE);
+		
+		$this->load->view('header');
+		
+		if( $this->session->userdata('logged_in') )
+		{
+			$session_data = $this->session->userdata('logged_in');
+			
+			$data['authority'] = $session_data['authority'];
+			$data['name'] = $session_data['name'];
+			$data['surname'] = $session_data['surname'];
+			$data['id'] = $session_data['id'];
+			
+			if ( $this->user_model->get_user_credit($data['id']) >= $this->course_model->get_course_credit($id,$validationDate) )
+			{
+				
+				if ( $data['authority'] == 0 )
+				{
+					redirect('home','refresh');
+				}
+				else if ( $data['authority'] == 1 )
+				{
+					$this->load->view('menu_student');
+					
+				}
+				else if ( $data['authority'] == 2 )
+				{
+					$this->load->view('menu_teacher');
+					
+				}
+				else
+				{
+					$this->load->view('menu_admin');
+					
+				}
+			}
+			else
+			{
+				// you don't have enough credit
 			}
 			
 		}
