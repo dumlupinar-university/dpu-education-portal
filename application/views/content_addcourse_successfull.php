@@ -1,4 +1,6 @@
 <div id ="content" >
+
+###git icin oynandı.
 	<h1>Course Has Been Done Successfully With Informations :</h1>
 	<h2>Name    :<?php echo $name; ?></h1>
 	<h2>Picture :<?php echo $picture; ?></h1>

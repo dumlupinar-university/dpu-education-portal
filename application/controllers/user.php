@@ -253,6 +253,53 @@ class User extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function edit_profile()
+	{
+		
+		$this->load->view('header');
+		
+		if( $this->session->userdata('logged_in') )
+		{
+			$session_data = $this->session->userdata('logged_in');
+			
+			$data['authority'] = $session_data['authority'];
+			$data['name'] = $session_data['name'];
+			$data['surname'] = $session_data['surname'];
+			$data['id'] = $session_data['id'];
+			
+			$this->load->model('user_model','',TRUE);
+			$userDetails["results"] = $this->user_model->get_user($data['id']);
+			
+			if ( $data['authority'] == 0 )
+			{
+				$this->load->view('menu');
+				$this->load->view('content_user_detail',$userDetails);
+			}
+			else if ( $data['authority'] == 1 )
+			{
+				$this->load->view('menu_student');
+				$this->load->view('content_user_detail',$userDetails);
+			}
+			else if ( $data['authority'] == 2 )
+			{		
+				$this->load->view('menu_teacher');
+				$this->load->view('content_user_detail',$userDetails);
+			}
+			else
+			{
+				$this->load->view('menu_admin');
+				$this->load->view('content_user_detail',$userDetails);
+			}
+			
+		}
+		else
+		{
+			redirect('home','refresh');
+		}
+		
+		$this->load->view('footer');
+	}
+	
 	function activate($email,$code)
 	{
 		$this->load->view('header');

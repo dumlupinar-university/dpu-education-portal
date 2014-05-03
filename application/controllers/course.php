@@ -132,6 +132,7 @@ class Course extends CI_Controller {
 			else
 			{
 				$this->load->view('menu_admin');
+				$courseDetails['status'] = 3;
 				$this->load->view('content_course_detail',$courseDetails);
 			}
 			

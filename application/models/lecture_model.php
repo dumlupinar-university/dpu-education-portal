@@ -3,6 +3,26 @@
 class Lecture_model extends CI_Model {
 	
 	
+	function get_full_lecture_list()
+	{
+		$this->db->select('L.id, L.name AS nameL, L.description , L.status , L.key ,
+								courses.name AS nameC');
+		$this->db->from('lectures as L');
+		$this->db->join('courses','courses.id = L.course','left'); 
+		
+		$query = $this->db->get();
+		
+		if( $query->num_rows() > 0 )
+		{
+			return $query->result();
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	
 	function get_list($course,$id)
 	{
 		$this->db->select('L.id, L.name, L.course , L.description');

@@ -22,7 +22,7 @@
 				<td>'.$surname.'</td>
 				<td>'.$email.'</td>
 				<td>'.$authority.'</td>
-				<td><a href="http://127.0.0.1/CIEducationPortal/index.php/user/get_user/'.$id.'">Details</a></td>
+				<td><a href='.site_url('user/get_user/'.$id.'').'>Details</a></td>
 				</tr>';
 	
 	}

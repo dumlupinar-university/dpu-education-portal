@@ -30,6 +30,25 @@ class Course_model extends CI_Model {
 			
 	}
 	
+	function get_full_course_list()
+	{
+		$this->db->select('C.id AS idC, C.name AS nameC, C.teacher, C.picture, C.status ,
+						users.name AS nameU , users.surname , users.id AS idU');
+		$this->db->from('courses AS C');
+		$this->db->join('users','users.id = C.teacher','INNER');
+		
+		$query = $this->db->get();
+		
+		if( $query->num_rows() >= 0 )
+		{
+			return $query->result();
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	function get_course_id($teacher,$name)
 	{
 		$this->db->select('id');
@@ -77,7 +96,6 @@ class Course_model extends CI_Model {
 		$this->db->from('courses');
 		$this->db->where('teacher',$teacher);
 		$this->db->where('id',$course);
-		$this->db->where('status',1);
 		$this->db->limit(1);
 		
 		$query = $this->db->get();
@@ -97,6 +115,7 @@ class Course_model extends CI_Model {
 	{
 		$this->db->select('id, name, teacher, picture');
 		$this->db->from('courses');
+		$this->db->where('status',1);
 		
 		$query = $this->db->get();
 		
@@ -142,6 +161,7 @@ class Course_model extends CI_Model {
 		$this->db->join('coursesinfos','I.course = C.id','INNER');
 		$this->db->join('coursescredits','L.course = C.id' ,'INNER');
 		$this->db->where('C.id',$id);
+		$this->db->where('status',1);
 		$this->db->limit(1);
 		
 		$query = $this->db->get();
