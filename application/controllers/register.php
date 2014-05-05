@@ -9,9 +9,10 @@ class Register extends CI_Controller {
 
 	public function index()
 	{
+		$data['status'] = 4;
 		$this->load->helper(array('form'));
 		$this->load->view('header');
-		$this->load->view('menu');
+		$this->load->view('menu',$data);
 		$this->load->view('content_register');
 		$this->load->view('footer');
 	}

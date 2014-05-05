@@ -1,4 +1,6 @@
-<div id ="content" >
+<div id="col-top"></div>
+<div id="col" class="box">
+<div id="lastest-post">
 	<center>
 		<h2>Login</h2>
 		<?php echo validation_errors(); ?>
@@ -20,5 +22,9 @@
 			</tr>
 		</table>
 		</center>
-	</form>
+	<?php echo form_close();?>
 </div>
+</div>
+
+<div id="col-bottom"></div>
+<hr class="noscreen" />

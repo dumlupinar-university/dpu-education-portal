@@ -21,8 +21,9 @@ class VerifyTeacher extends CI_Controller {
 
 		if( $this->form_validation->run() == FALSE )
 		{
+			$data['status'] = 1;
 			$this->load->view('header');
-			$this->load->view('menu_student');
+			$this->load->view('menu',$data);
 			$this->load->view('content_become_teacher');
 			$this->load->view('footer');
 		}
@@ -37,10 +38,11 @@ class VerifyTeacher extends CI_Controller {
 	
 	public function successfull($dataCourse)
 	{
-		$this->load->view('header');
-		$this->load->view('menu_teacher');
-		$this->load->view('content_addcourse_successfull',$dataCourse);
-		$this->load->view('footer');
+			$data['status'] = 1;
+			$this->load->view('header');
+			$this->load->view('menu',$data);
+			$this->load->view('content_become_teacher_succesfull');
+			$this->load->view('footer');
 	}
 
 	

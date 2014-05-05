@@ -17,6 +17,7 @@ class Home extends CI_Controller {
 		
 		$data['lastcourses'] = $this->course_model->get_last_three_course();
 		
+		
 		if( $this->session->userdata('logged_in') )
 		{
 			$session_data = $this->session->userdata('logged_in');
@@ -34,24 +35,28 @@ class Home extends CI_Controller {
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$this->load->view('menu_student');
-				$this->load->view('content_student',$data);
+				$data['status'] = 1;
+				$this->load->view('menu',$data);
+				$this->load->view('content',$data);
 			}
 			else if ( $data['authority'] == 2 )
 			{
-				$this->load->view('menu_teacher');
-				$this->load->view('content_teacher',$data);
+				$data['status'] = 2;
+				$this->load->view('menu',$data);
+				$this->load->view('content',$data);
 			}
-			else
+			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
-				$this->load->view('content_admin',$data);
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
+				$this->load->view('content',$data);
 			}
 			
 		}
 		else
 		{
-			$this->load->view('menu');
+			$data['status'] = 4;
+			$this->load->view('menu',$data);
 			$this->load->view('content',$data);
 		}
 		

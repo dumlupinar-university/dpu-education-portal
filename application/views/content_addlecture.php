@@ -1,4 +1,6 @@
-<div id ="content" >
+<div id="col-top"></div>
+<div id="col" class="box">
+<div id="lastest-post">
 	<center>
 		<h1>Add Lecture</h1>
 		<?php echo validation_errors(); ?>
@@ -28,3 +30,7 @@
 		<?php echo form_close();?>
 	</center>
 </div>
+</div>
+
+<div id="col-bottom"></div>
+<hr class="noscreen" />

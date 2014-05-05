@@ -1,5 +1,6 @@
-<div id=content>
-
+<div id="col-top"></div>
+<div id="col" class="box">
+<div id="lastest-post">
 <?php
 
 	echo '<h2><em>'.$header.'</em></h2>';
@@ -12,12 +13,15 @@
 	
 	echo '<ul>';
 	
-	echo '<li><a href='.site_url('user/get_teacher/'.$id.'').'/>'.$name.' '.$surname.'</a></li>';
+	echo '<li><p><a href='.site_url('user/get_teacher/'.$id.'').'/>'.$name.' '.$surname.'</a></p></li>';
 	
 	echo '</ul>';
 
 	}
 ?>
 
-
 </div>
+</div>
+
+<div id="col-bottom"></div>
+<hr class="noscreen" />

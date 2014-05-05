@@ -1,5 +1,6 @@
-<div id = "content">
-
+<div id="col-top"></div>
+<div id="col" class="box">
+<div id="lastest-post">
 
 <?php
 	if ( !empty($result) )
@@ -18,3 +19,7 @@
 ?>
 
 </div>
+</div>
+
+<div id="col-bottom"></div>
+<hr class="noscreen" />

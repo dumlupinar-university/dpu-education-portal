@@ -1,30 +1,68 @@
-<div id="col-top"></div>
-	<div id="col" class="box">
-	<div id="ribbon"></div>
+<?php
+	echo '<div id="col-top"></div>
+		<div id="col" class="box">
+		<div id="ribbon"></div>
 		<div id="latest-post" class="post">
 			
-			<div id="col-browser"><a href="#"><img src='<?php echo base_url();?>assets/tmp/browser.gif' width='255' height='177' alt='' /></a></div> 
+		<div id="col-browser"><a href="#"><img src="'.base_url().'assets/tmp/browser.gif" width="255" height="177" alt="" /></a></div> 
 			
-				<div id="col-text">
+		<div id="col-text">
 				
-					<h2 id="slogan span"><span></span>Welcome To Education Portal Of Dumlupinar University !!</h2>
+		';
+	 
+	if ( $status == 4 )
+	{ 
+	echo '				
+		<h2 id="slogan span"><span></span>Welcome To Education Portal Of Dumlupinar University !!</h2>
 			
-					<p>Learn whatever you want from a pro !</p>
+			<p>Learn whatever you want from a pro !</p>
 					
-					<p>This project aims to help anybody who wants to learn something. We - Dumlupinar University's Students - hope you will enjoy by learning new things.</p>
+			<p>This project aims to help anybody who wants to learn something. We - Dumlupinar Universitys Students - hope you will enjoy by learning new things.</p>
 					
-					<p>It is easy as long as sign-up to have this advantageous.</p>
+			<p>It is easy as long as sign-up to have this advantageous.</p>
 					
-					<p>If you are still searching for register button just <strong><a href='<?php echo site_url('register'); ?>'>Click Here</a></strong> :) !!</p>
+			<p>If you are still searching for register button just <strong><a href='.site_url('register').'>Click Here</a></strong> :) !!</p>
 
-					<p>If you are a member just <strong><a href='<?php echo site_url('login'); ?>'>Click Here</a></strong> to Login :) ..</p>
+			<p>If you are a member just <strong><a href='.site_url('login').'>Click Here</a></strong> to Login :) ..</p>
 			
-					<p id="btns">
-						<a href='<?php echo site_url('login'); ?>'><img src='<?php echo base_url();?>assets/design/btn-tell.gif' alt='' /></a>
-						<a href='<?php echo site_url('register'); ?>'><img src='<?php echo base_url();?>assets/design/btn-purchase.gif' alt='' /></a>
-					</p>
+			<p id="btns">
+				<a href='.site_url('login').'><img src="'.base_url().'assets/design/btn-tell.gif" alt="" /></a>
+				<a href='.site_url('register').'><img src="'.base_url().'assets/design/btn-purchase.gif" alt="" /></a>
+			</p>
+		';			
+			
+	
+	}
+	else if ( $status == 1 || $status == 2 || $status == 3 )
+	{
+		if ( !empty($name) && !empty($surname) )
+		{
+		echo '				
+		<h2 id="slogan span"><span></span>Welcome To Education Portal Of Dumlupinar University !!</h2>
+			
+			<p>'.$name.' '.$surname.'!</p>
+			
+			<p>Learn whatever you want from a pro !</p>
 					
-				</div>
+			<p>This project aims to help anybody who wants to learn something. We - Dumlupinar Universitys Students - hope you will enjoy by learning new things.</p>
+					
+			<p>It is easy as long as sign-up to have this advantageous.</p>
+					
+			<p>Nice to see you again :) </p>
+			
+			<p id="btns">
+				<a href='.site_url('login').'><img src="'.base_url().'assets/design/btn-tell.gif" alt="" /></a>
+				<a href='.site_url('register').'><img src="'.base_url().'assets/design/btn-purchase.gif" alt="" /></a>
+			</p>
+		';		
+		}
+	}
+	else
+	{
+		die();
+	}
+	
+	echo '	</div>
 			</div>
 			</div>
 			<div id="col-bottom"></div>
@@ -33,10 +71,8 @@
 			
 			<div id="cols3-top"></div>
 			
-			<div id="cols3" class="box">
-				
-			<?php 
-			
+			<div id="cols3" class="box">';
+		
 			$cols = array(
 				'1' => 'col',
 				'2' => 'col sec',
@@ -70,7 +106,7 @@
 							
 							<ul class="ul-01">
 								<p> Instructors :</p>
-								<li><a href='.site_url('user/get_teacher/'.$teacherId.'').'>'.$teacherName.''.$teacherSurname.'</a></li>
+								<li><a href='.site_url('user/get_teacher/'.$teacherId.'').'>'.$teacherName.' '.$teacherSurname.'</a></li>
 							</ul>
 
 						</div> <!-- /col-text -->
@@ -86,9 +122,11 @@
 						
 			}
 			
-		?>
+			
+		echo '<div id="cols3-bottom"></div>
 		
-		<div id="cols3-bottom"></div>
+				<hr class="noscreen" />';
+?>
 		
-		<hr class="noscreen" />
+		
 		

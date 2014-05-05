@@ -33,24 +33,28 @@ class Course extends CI_Controller {
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$this->load->view('menu_student');
-				$this->load->view('content_courses_student',$data);
+				$data['status'] = 1;
+				$this->load->view('menu',$data);
+				$this->load->view('content_courses',$data);
 			}
 			else if ( $data['authority'] == 2 )
 			{
-				$this->load->view('menu_teacher');
-				$this->load->view('content_courses_teacher',$data);
-			}
-			else
+				$data['status'] = 2;
+				$this->load->view('menu',$data);
+				$this->load->view('content_courses',$data);
+			} 
+			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('content_courses',$data);
 			}
 			
 		}
 		else
 		{
-			$this->load->view('menu');
+			$data['status'] = 4;
+			$this->load->view('menu',$data);
 			$this->load->view('content_courses',$data);
 		}
 		
@@ -61,7 +65,7 @@ class Course extends CI_Controller {
 	{
 		$this->load->view('header');
 		$this->load->helper(array('form'));
-		
+
 		if( $this->session->userdata('logged_in') )
 		{
 			$session_data = $this->session->userdata('logged_in');
@@ -73,12 +77,14 @@ class Course extends CI_Controller {
 			
 			if ( $data['authority'] == 2 )
 			{
-				$this->load->view('menu_teacher');
+				$data['status'] = 2;
+				$this->load->view('menu',$data);
 				$this->load->view('content_addcourse',$data);
 			}
 			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('content_addcourse',$data);
 			}
 			else
@@ -100,8 +106,6 @@ class Course extends CI_Controller {
 		$this->load->model('course_model','',TRUE);
 		
 		$courseDetails['results'] = $this->course_model->get_course($id);
-		$courseDetails['status'] = 0;
-		
 		$this->load->view('header');
 		
 		if( $this->session->userdata('logged_in') )
@@ -122,25 +126,28 @@ class Course extends CI_Controller {
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$this->load->view('menu_student');
+				$courseDetails['status'] = 1;
+				$this->load->view('menu',$courseDetails);
 				$this->load->view('content_course_detail',$courseDetails);
 			}
 			else if ( $data['authority'] == 2 )
 			{
-				$this->load->view('menu_teacher');
+				$courseDetails['status'] = 2;
+				$this->load->view('menu',$courseDetails);
 				$this->load->view('content_course_detail',$courseDetails);
 			}
-			else
+			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
 				$courseDetails['status'] = 3;
+				$this->load->view('menu',$courseDetails);
 				$this->load->view('content_course_detail',$courseDetails);
 			}
 			
 		}
 		else
 		{
-			$this->load->view('menu');
+			$courseDetails['status'] = 4;
+			$this->load->view('menu',$courseDetails);
 			$this->load->view('content_course_detail',$courseDetails);
 		}
 		
@@ -170,24 +177,28 @@ class Course extends CI_Controller {
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$this->load->view('menu_student');
+				$data['status'] = 1;
+				$this->load->view('menu',$data);
 				$this->load->view('content_courses',$data);
 			}
 			else if ( $data['authority'] == 2 )
 			{
-				$this->load->view('menu_teacher');
+				$data['status'] = 2;
+				$this->load->view('menu',$data);
 				$this->load->view('content_courses',$data);
 			}
-			else
+			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('content_courses',$data);
 			}
 			
 		}
 		else
 		{
-			$this->load->view('menu');
+			$data['status'] = 4;
+			$this->load->view('menu',$data);
 			$this->load->view('content_courses',$data);
 		}
 		
@@ -196,11 +207,11 @@ class Course extends CI_Controller {
 	
 	function buy_course($id,$validationDate)
 	{
-		$this->load->model('course_model','',TRUE);
-		$this->load->model('user_model','',TRUE);
-		
 		$this->load->view('header');
 		
+		$this->load->model('course_model','',TRUE);
+		$this->load->model('user_model','',TRUE);
+			
 		if( $this->session->userdata('logged_in') )
 		{
 			$session_data = $this->session->userdata('logged_in');
@@ -219,17 +230,20 @@ class Course extends CI_Controller {
 				}
 				else if ( $data['authority'] == 1 )
 				{
-					$this->load->view('menu_student');
+					$data['status'] = 1;
+					$this->load->view('menu',$data);
 					
 				}
 				else if ( $data['authority'] == 2 )
 				{
-					$this->load->view('menu_teacher');
+					$data['status'] = 2;
+					$this->load->view('menu',$data);
 					
 				}
-				else
+				else if ( $data['authority'] == 3 )
 				{
-					$this->load->view('menu_admin');
+					$data['status'] = 3;
+					$this->load->view('menu',$data);
 					
 				}
 			}
@@ -241,8 +255,8 @@ class Course extends CI_Controller {
 		}
 		else
 		{
-			$this->load->view('menu');
-			$this->load->view('content_courses',$data);
+			$data['status'] = 4;
+			$this->load->view('menu',$data);
 		}
 		
 		$this->load->view('footer');
@@ -253,6 +267,8 @@ class Course extends CI_Controller {
 		$this->load->model('course_model','',TRUE);
 		
 		$this->load->view('header');
+		
+		
 		
 		if( $this->session->userdata('logged_in') )
 		{
@@ -271,24 +287,28 @@ class Course extends CI_Controller {
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$this->load->view('menu_student');
+				$data['status'] = 1;
+				$this->load->view('menu',$data);
 				$this->load->view('content_courses',$data);
 			}
 			else if ( $data['authority'] == 2 )
 			{
-				$this->load->view('menu_teacher');
+				$data['status'] = 2;
+				$this->load->view('menu',$data);
 				$this->load->view('content_courses',$data);
 			}
-			else
+			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('content_courses',$data);
 			}
 			
 		}
 		else
 		{
-			$this->load->view('menu');
+			$data['status'] = 4;
+			$this->load->view('menu',$data);
 			$this->load->view('content_courses',$data);
 		}
 		

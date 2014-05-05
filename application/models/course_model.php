@@ -138,8 +138,12 @@ class Course_model extends CI_Model {
 	
 	function get_list()
 	{
-		$this->db->select('id, name, teacher, picture');
-		$this->db->from('courses');
+		$this->db->select('C.id AS idC, C.name AS nameC, C.teacher, C.picture ,
+						   U.id AS idU, U.name AS nameU, U.surname,
+						   L.description');
+		$this->db->from('courses AS C');
+		$this->db->join('users AS U','U.id = C.teacher','INNER');
+		$this->db->join('coursesinfos AS L','L.course = C.id','INNER');
 		$this->db->where('status',1);
 		
 		$query = $this->db->get();
@@ -156,9 +160,13 @@ class Course_model extends CI_Model {
 	
 	function get_purchased_list($id)
 	{
-		$this->db->select('id, name');
-		$this->db->from('courses');
-		$this->db->join('userscourses','userscourses.course = id','INNER');
+		$this->db->select('C.id AS idC, C.name AS nameC, C.teacher, C.picture ,
+						   U.id AS idU, U.name AS nameU, U.surname,
+						   L.description');
+		$this->db->from('courses AS C');
+		$this->db->join('users AS U','U.id = C.teacher','INNER');
+		$this->db->join('coursesinfos AS L','L.course = C.id','INNER');
+		$this->db->join('userscourses','userscourses.course = C.id','INNER');
 		$this->db->where('userscourses.user',$id);
 		$this->db->where('status',1);
 		
@@ -222,8 +230,12 @@ class Course_model extends CI_Model {
 	
 	function get_teacher_course_list($teacher)
 	{
-		$this->db->select('id, name');
-		$this->db->from('courses');
+		$this->db->select('C.id AS idC, C.name AS nameC, C.teacher, C.picture ,
+						   U.id AS idU, U.name AS nameU, U.surname,
+						   L.description');
+		$this->db->from('courses AS C');
+		$this->db->join('users AS U','U.id = C.teacher','INNER');
+		$this->db->join('coursesinfos AS L','L.course = C.id','INNER');
 		$this->db->where('teacher',$teacher);
 		$this->db->where('status',1);
 		

@@ -1,6 +1,7 @@
-<div id = "content">
-
-
+<div id="col-top"></div>
+<div id="col" class="box">
+<div id="lastest-post">
+	
 <?php
 
 		echo '<p><h2><em>User</em></h2></p>';
@@ -44,3 +45,7 @@
 ?>
 
 </div>
+</div>
+
+<div id="col-bottom"></div>
+<hr class="noscreen" />

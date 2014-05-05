@@ -24,7 +24,8 @@ class Manage extends CI_Controller {
 			
 			if ( $data['authority'] == 3 )
 			{	
-				$this->load->view('menu_admin');
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('manage_admin',$data);
 			}
 			else 
@@ -62,7 +63,8 @@ class Manage extends CI_Controller {
 				$data['list'] = $this->user_model->get_user_list();
 				$data['header'] = "User List";
 				
-				$this->load->view('menu_admin');
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('manage_admin_user',$data);
 			}
 			else 
@@ -99,7 +101,8 @@ class Manage extends CI_Controller {
 				$data['list'] = $this->course_model->get_full_course_list();
 				$data['header'] = "Course List";
 				
-				$this->load->view('menu_admin');
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('manage_admin_course',$data);
 			}
 			else 
@@ -135,7 +138,8 @@ class Manage extends CI_Controller {
 				$data['list'] = $this->lecture_model->get_full_lecture_list();
 				$data['header'] = "Lecture List";
 				
-				$this->load->view('menu_admin');
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('manage_admin_lecture',$data);
 			}
 			else 

@@ -44,17 +44,20 @@ class Lecture extends CI_Controller {
 				}
 				else if ( $data['authority'] == 1 )
 				{
-					$this->load->view('menu_student');
+					$data['status'] = 1;
+					$this->load->view('menu',$data);
 					$this->load->view('content_lecture_list',$data);
 				}
 				else if ( $data['authority'] == 2 )
 				{
-					$this->load->view('menu_teacher');
+					$data['status'] = 2;
+					$this->load->view('menu',$data);
 					$this->load->view('content_lecture_list',$data);
 				}
-				else
+				else if ( $data['authority'] == 3 )
 				{
-					$this->load->view('menu_admin');
+					$data['status'] = 3;
+					$this->load->view('menu',$data);
 					$this->load->view('content_lecture_list',$data);
 				}
 			}
@@ -97,17 +100,20 @@ class Lecture extends CI_Controller {
 				}
 				else if ( $data['authority'] == 1 )
 				{
-					$this->load->view('menu_student');
+					$data['status'] = 1;
+					$this->load->view('menu',$data);
 					$this->load->view('content_lecture_detail',$lecture);
 				}
 				else if ( $data['authority'] == 2 )
 				{
-					$this->load->view('menu_teacher');
+					$data['status'] = 1;
+					$this->load->view('menu',$data);
 					$this->load->view('content_lecture_detail',$lecture);
 				}
-				else
+				else if ( $data['authority'] == 3 )
 				{
-					$this->load->view('menu_admin');
+					$data['status'] = 1;
+					$this->load->view('menu',$data);
 					$this->load->view('content_lecture_detail',$lecture);
 				}
 			}
@@ -138,12 +144,14 @@ class Lecture extends CI_Controller {
 			
 			if ( $data['authority'] == 2 )
 			{
-				$this->load->view('menu_teacher');
+				$data['status'] = 2;
+				$this->load->view('menu',$data);
 				$this->load->view('content_addlecture',$data);
 			}
 			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('content_addlecture',$data);
 			}
 			else

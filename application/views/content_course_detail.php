@@ -1,6 +1,6 @@
-<div id = "content">
-
-
+<div id="col-top"></div>
+<div id="col" class="box">
+<div id="lastest-post">
 <?php
 
 	echo'<p><em><h2>Course</h2></em></p>';
@@ -54,3 +54,7 @@
 ?>
 
 </div>
+</div>
+
+<div id="col-bottom"></div>
+<hr class="noscreen" />

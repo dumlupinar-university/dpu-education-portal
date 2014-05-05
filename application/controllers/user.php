@@ -29,29 +29,32 @@ class User extends CI_Controller {
 			
 			if ( $data['authority'] == 0 )
 			{
-				$this->load->view('menu');
-				$this->load->view('content_user_detail',$userDetails);
+
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$this->load->view('menu_student');
+				$userDetails['status'] = 1;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_user_detail',$userDetails);
 			}
 			else if ( $data['authority'] == 2 )
 			{
-				$this->load->view('menu_teacher');
+				$userDetails['status'] = 2;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_user_detail',$userDetails);
 			}
-			else
+			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
+				$userDetails['status'] = 3;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_user_detail',$userDetails);
 			}
 			
 		}
 		else
 		{
-			$this->load->view('menu');
+			$userDetails['status'] = 4;
+			$this->load->view('menu',$userDetails);
 			$this->load->view('content_user_detail',$userDetails);
 		}
 		
@@ -81,29 +84,32 @@ class User extends CI_Controller {
 			
 			if ( $data['authority'] == 0 )
 			{
-				$this->load->view('menu');
-				$this->load->view('content_teacher_detail',$userDetails);
+
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$this->load->view('menu_student');
+				$userDetails['status'] = 1;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_teacher_detail',$userDetails);
 			}
 			else if ( $data['authority'] == 2 )
 			{
-				$this->load->view('menu_teacher');
+				$userDetails['status'] = 2;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_teacher_detail',$userDetails);
 			}
-			else
+			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
+				$userDetails['status'] = 3;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_teacher_detail',$userDetails);
 			}
 			
 		}
 		else
 		{
-			$this->load->view('menu');
+			$userDetails['status'] = 4;
+			$this->load->view('menu',$userDetails);
 			$this->load->view('content_teacher_detail',$userDetails);
 		}
 		
@@ -130,29 +136,32 @@ class User extends CI_Controller {
 			
 			if ( $data['authority'] == 0 )
 			{
-				$this->load->view('menu');
-				$this->load->view('content_user_list',$data);
+
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$this->load->view('menu_student');
+				$data['status'] = 1;
+				$this->load->view('menu',$data);
 				$this->load->view('content_user_list',$data);
 			}
 			else if ( $data['authority'] == 2 )
 			{
-				$this->load->view('menu_teacher');
+				$data['status'] = 2;
+				$this->load->view('menu',$data);
 				$this->load->view('content_user_list',$data);
 			}
-			else
+			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('content_user_list',$data);
 			}
 			
 		}
 		else
 		{
-			$this->load->view('menu');
+			$data['status'] = 4;
+			$this->load->view('menu',$data);
 			$this->load->view('content_user_list',$data);
 		}
 		
@@ -179,29 +188,32 @@ class User extends CI_Controller {
 			
 			if ( $data['authority'] == 0 )
 			{
-				$this->load->view('menu');
-				$this->load->view('content_teacher_list',$data);
+
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$this->load->view('menu_student');
+				$data['status'] = 1;
+				$this->load->view('menu',$data);
 				$this->load->view('content_teacher_list',$data);
 			}
 			else if ( $data['authority'] == 2 )
 			{
-				$this->load->view('menu_teacher');
+				$data['status'] = 2;
+				$this->load->view('menu',$data);
 				$this->load->view('content_teacher_list',$data);
 			}
-			else
+			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('content_teacher_list',$data);
 			}
 			
 		}
 		else
 		{
-			$this->load->view('menu');
+			$data['status'] = 4;
+			$this->load->view('menu',$data);
 			$this->load->view('content_teacher_list',$data);
 		}
 		
@@ -223,27 +235,30 @@ class User extends CI_Controller {
 			$data['id'] = $session_data['id'];
 			
 			$this->load->model('user_model','',TRUE);
+			
 			$userDetails["results"] = $this->user_model->get_user($data['id']);
 			$userDetails["infos"] = $this->user_model->get_user_infos($data['id']);
 			
 			if ( $data['authority'] == 0 )
 			{
-				$this->load->view('menu');
-				$this->load->view('content_user_detail',$userDetails);
+
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$this->load->view('menu_student');
+				$userDetails['status'] = 1;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_user_detail',$userDetails);
 			}
 			else if ( $data['authority'] == 2 )
 			{		
-				$this->load->view('menu_teacher');
+				$userDetails['status'] = 2;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_user_detail',$userDetails);
 			}
-			else
+			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
+				$userDetails['status'] = 3;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_user_detail',$userDetails);
 			}
 			
@@ -276,22 +291,24 @@ class User extends CI_Controller {
 			
 			if ( $data['authority'] == 0 )
 			{
-				$this->load->view('menu');
-				$this->load->view('content_user_detail',$userDetails);
+
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$this->load->view('menu_student');
+				$userDetails['status'] = 1;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_user_detail',$userDetails);
 			}
 			else if ( $data['authority'] == 2 )
 			{		
-				$this->load->view('menu_teacher');
+				$userDetails['status'] = 2;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_user_detail',$userDetails);
 			}
-			else
+			else if ( $data['authority'] == 3 )
 			{
-				$this->load->view('menu_admin');
+				$userDetails['status'] = 3;
+				$this->load->view('menu',$userDetails);
 				$this->load->view('content_user_detail',$userDetails);
 			}
 			
@@ -311,9 +328,7 @@ class User extends CI_Controller {
 		
 		if( $this->session->userdata('logged_in') )
 		{
-	
-			redirect('home','refresh');
-			
+			redirect('home','refresh');	
 		}
 		else
 		{
@@ -336,8 +351,6 @@ class User extends CI_Controller {
 		$this->load->view('header');
 		$this->load->helper(array('form'));
 		
-		$this->load->view('header');
-		
 		if( $this->session->userdata('logged_in') )
 		{
 			$session_data = $this->session->userdata('logged_in');
@@ -348,23 +361,15 @@ class User extends CI_Controller {
 			$data['id'] = $session_data['id'];
 			
 			
-			if ( $data['authority'] == 0 )
+			if ( $data['authority'] == 1 )
 			{
-				redirect('home','refresh');
-			}
-			else if ( $data['authority'] == 1 )
-			{
-				$this->load->view('menu_student');
+				$data['status'] = 1;
+				$this->load->view('menu',$data);
 				$this->load->view('content_become_teacher',$data);
-			}
-			else if ( $data['authority'] == 2 )
-			{		
-				redirect('home','refresh');
 			}
 			else
 			{
-				$this->load->view('menu_admin');
-				$this->load->view('content_become_teacher',$data);
+				redirect('home','refresh');
 			}
 			
 		}

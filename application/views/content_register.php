@@ -1,4 +1,6 @@
-<div id ="content" >
+<div id="col-top"></div>
+<div id="col" class="box">
+<div id="lastest-post">
 	<center>
 		<h2>Register</h2>
 		<?php echo validation_errors(); ?>
@@ -36,3 +38,7 @@
 		</center>
 	<?php echo form_close();?>
 </div>
+</div>
+
+<div id="col-bottom"></div>
+<hr class="noscreen" />
