@@ -261,7 +261,7 @@ ul.ul-list span.date {padding-right:10px;}
     .col h3 {margin:0; padding:7px 15px 12px 50px; background:url("../design/cols3-title.gif") 20px 40% no-repeat; font-size:120%;}
 
         .col-text {padding:10px; border-top:1px solid #DFDFDF;}
-        .col-text p {margin:0;}
+        .col-text p {margin:0;text-overflow: ellipsis;word-wrap: break-word;overflow: hidden;max-height: 5.4em;line-height: 1.8em;}
         .col-text ul {margin-bottom:0;}
         .col-more {padding:10px 10px 1px 0; text-align:right;}
 

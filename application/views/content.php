@@ -35,87 +35,60 @@
 			
 			<div id="cols3" class="box">
 				
-			   <div class="col">
-
-					<h3><a href="#">Product I.</a></h3>
-					
-					<p class="nom t-center"><a href="#"><img src='<?php echo base_url();?>assets/tmp/200x140.gif' alt='' /></a></p>
-
-					<div class="col-text">
-
-						<p>Lorem ipsum dolor sit amet <a href="#">consectetuer</a> amit adipiscing elit. <strong>Nunc feugiat.</strong>
-						Inam massa est feugiat <a href="#">pharetra</a> lacus. In non arcu nec liberom pharetra rutrum est.</p>
+			<?php 
+			
+			$cols = array(
+				'1' => 'col',
+				'2' => 'col sec',
+				'3' => 'col last'
+				);
+			
+				if ( !empty($lastcourses) )
+				{
+					$i = 0;
+					foreach ($lastcourses as $row)
+					{
+						$courseId = $row->idC;
+						$courseName = $row->nameC;
+						$description = $row->description;
+						$teacherName = $row->nameU;
+						$teacherSurname = $row->surname;
+						$teacherId = $row->idU;
+						$i++;
 						
-						<ul class="ul-01">
-							<li>Lorem ipsum dolor sit amet</li>
-							<li>Lorem ipsum dolor sit amet</li>
-							<li>Lorem ipsum dolor sit amet</li>
-						</ul>
 
-					</div> <!-- /col-text -->
+			 echo ' <div class="'.$cols["$i"].'">
 
-					<div class="col-more"><a href="#"><img src='<?php echo base_url();?>assets/design/cols3-more.gif' alt='' /></a></div>
-
-				</div> <!-- /col -->
-
-        <hr class="noscreen" />
-
-        <!-- Column II. -->
-				<div class="col sec">
-
-					<h3><a href="#">Product II.</a></h3>
-
-					<p class="nom t-center"><a href="#"><img src='<?php echo base_url();?>assets/tmp/200x140.gif' alt='' /></a></p>
-
-					<div class="col-text">
-
-						<p>Lorem ipsum dolor sit amet consectetuer amit adipiscing elit. <strong>Nunc feugiat.</strong>
-						Inam massa est feugiat <a href="#">pharetra</a> lacus. In non arcu nec liberom pharetra rutrum est.</p>
-
-						<ul class="ul-01">
-							<li>Lorem ipsum dolor sit amet</li>
-							<li>Lorem ipsum dolor sit amet</li>
-							<li>Lorem ipsum dolor sit amet</li>
-						</ul>
-
-					</div> <!-- /col-text -->
-
-					<div class="col-more"><a href="#"><img src='<?php echo base_url();?>assets/design/cols3-more.gif' alt='' /></a></div>
+					<h3><a href='.site_url('course/get_course/'.$courseId.'').'>'.$courseName.'</a></h3>
 					
-				</div> <!-- /col -->
+						<p class="nom t-center"><a href='.site_url('course/get_course/'.$courseId.'').'><img src="'.base_url().'assets/tmp/200x140.gif" alt="" /></a></p>
 
-        <hr class="noscreen" />
+						<div class="col-text">
 
-        <!-- Column III. -->
-				<div class="col last">
+							<p>'.$description.'</p>
+						
+							
+							<ul class="ul-01">
+								<p> Instructors :</p>
+								<li><a href='.site_url('user/get_teacher/'.$teacherId.'').'>'.$teacherName.''.$teacherSurname.'</a></li>
+							</ul>
 
-					<h3><a href="#">Product III.</a></h3>
+						</div> <!-- /col-text -->
 
-					<p class="nom t-center"><a href="#"><img src='<?php echo base_url();?>assets/tmp/200x140.gif' alt='' /></a></p>
+						<div class="col-more"><a href='.site_url('course/get_course/'.$courseId.'').'><img src="'.base_url().'assets/design/cols3-more.gif" alt="" /></a></div>
 
-					<div class="col-text">
+					</div> <!-- /col -->
 
-						<p>Lorem ipsum dolor sit amet consectetuer amit adipiscing elit. <strong>Nunc feugiat.</strong>
-						Inam massa est feugiat pharetra lacus. In non arcu nec liberom <a href="#">pharetra rutrum est</a>.</p>
-
-						<ul class="ul-01">
-							<li>Lorem ipsum dolor sit amet</li>
-							<li>Lorem ipsum dolor sit amet</li>
-							<li>Lorem ipsum dolor sit amet</li>
-						</ul>
-
-					</div> <!-- /col-text -->
-
-					<div class="col-more"><a href="#"><img src='<?php echo base_url();?>assets/design/cols3-more.gif' alt='' /></a></div>
-
-				</div> <!-- /col -->
-
-        <hr class="noscreen" />
-    
-		</div> <!-- /cols3 -->
-		<div id="cols3-bottom">
-	
-		</div>
+					<hr class="noscreen" />';
+       
+					
+				}
+						
+			}
+			
+		?>
+		
+		<div id="cols3-bottom"></div>
 		
 		<hr class="noscreen" />
 		

@@ -49,6 +49,31 @@ class Course_model extends CI_Model {
 		}
 	}
 	
+	function get_last_three_course()
+	{
+		$this->db->select('C.id AS idC, C.name As nameC, C.teacher, C.picture, C.status,
+							L.description,
+							U.name As nameU , U.surname , U.id As idU');
+							
+		$this->db->from('courses AS C');
+		$this->db->join('users AS U','U.id = C.teacher','INNER');
+		$this->db->join('coursesinfos AS L', 'L.course = C.id','INNER');
+		$this->db->where('C.status',1);
+		$this->db->order_by('L.createddate','desc');
+		$this->db->limit(3);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() > 0 )
+		{
+			return $query->result();
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	function get_course_id($teacher,$name)
 	{
 		$this->db->select('id');
