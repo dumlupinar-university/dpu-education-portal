@@ -42,7 +42,7 @@ ul.ul-list span.date {padding-right:10px;}
 3) Layout
 ---------------------------------------------------------------------------------------------------------- */
 
-#main {width:960px; margin:0 auto; overflow:hidden;}
+#main {width:1000px; margin:0 auto; overflow:hidden;}
 
     #header {position:relative; height:90px; padding:30px 20px 15px 20px;}
 
@@ -59,7 +59,7 @@ ul.ul-list span.date {padding-right:10px;}
     #tray li#tray-active a {background:url("../design/tray-active.gif");}
 */
 #tray {
-    width: 960px;
+    width: 915px;
     height: 45px;
     margin: 50px auto;
     padding: 0 10px;
@@ -219,6 +219,7 @@ ul.ul-list span.date {padding-right:10px;}
 #col-bottom {width:960px; height:5px; margin-bottom:15px; background:url("../design/col-bottom.gif") 0 0 no-repeat; font-size:0; line-height:0; overflow:hidden;}
 #col {position:relative; padding:15px 30px 15px 20px; background:url("../design/col.gif") 0 0 repeat-y;}
 
+	#col .box{width:960px;}
     #ribbon {position:absolute; top:-5px; left:0; width:100px; height:100px; background:url("../design/ribbon.gif") 0 0 no-repeat; font-size:0; line-height:0; overflow:hidden; z-index:10;}
 
     #col-browser {position:relative; float:left; width:280px; height:215px; background:url("../design/browser.gif") 0 0 no-repeat;}
@@ -251,9 +252,11 @@ ul.ul-list span.date {padding-right:10px;}
 
 #cols3-top {width:960px; height:5px; margin-top:15px; background:url("../design/cols3-top.gif") 0 0 no-repeat; font-size:0; line-height:0; overflow:hidden;}
 #cols3-bottom {width:960px; height:5px; margin-bottom:15px; background:url("../design/cols3-bottom.gif") 0 0 no-repeat; font-size:0; line-height:0; overflow:hidden;}
-#cols3 {background:url("../design/cols3.gif") 0 0 repeat-y;}
+#cols3 {position:relative;background:url("../design/cols3.gif") 0 0 repeat-y;}
 
+	#cols3 .box {position:relative;width:960px;}
     .col {float:left; width:308px; padding:0 1px; margin-right:10px;}
+    .col.sec {padding:0 6px;}
     .col.last {margin-right:0;}
     .col h3 {margin:0; padding:7px 15px 12px 50px; background:url("../design/cols3-title.gif") 20px 40% no-repeat; font-size:120%;}
 

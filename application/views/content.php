@@ -3,7 +3,7 @@
 	<div id="ribbon"></div>
 		<div id="latest-post" class="post">
 			
-			<div id="col-browser"><a href="#"><img src="http://127.0.0.1/CIEducationPortal/assets/tmp/browser.gif" width="255" height="177" alt="" /></a></div> 
+			<div id="col-browser"><a href="#"><img src='<?php echo base_url();?>assets/tmp/browser.gif' width='255' height='177' alt='' /></a></div> 
 			
 				<div id="col-text">
 				
@@ -20,13 +20,13 @@
 					<p>If you are a member just <strong><a href='<?php echo site_url('login'); ?>'>Click Here</a></strong> to Login :) ..</p>
 			
 					<p id="btns">
-						<a href="#"><img src="http://127.0.0.1/CIEducationPortal/assets/design/btn-tell.gif" alt="" /></a>
-						<a href="#"><img src="http://127.0.0.1/CIEducationPortal/assets/design/btn-purchase.gif" alt="" /></a>
+						<a href='<?php echo site_url('login'); ?>'><img src='<?php echo base_url();?>assets/design/btn-tell.gif' alt='' /></a>
+						<a href='<?php echo site_url('register'); ?>'><img src='<?php echo base_url();?>assets/design/btn-purchase.gif' alt='' /></a>
 					</p>
 					
 				</div>
 			</div>
-			
+			</div>
 			<div id="col-bottom"></div>
 			
 			<hr class="noscreen" />
@@ -34,11 +34,12 @@
 			<div id="cols3-top"></div>
 			
 			<div id="cols3" class="box">
+				
 			   <div class="col">
 
 					<h3><a href="#">Product I.</a></h3>
 					
-					<p class="nom t-center"><a href="#"><img src="http://127.0.0.1/CIEducationPortal/assets/tmp/200x140.gif" alt="" /></a></p>
+					<p class="nom t-center"><a href="#"><img src='<?php echo base_url();?>assets/tmp/200x140.gif' alt='' /></a></p>
 
 					<div class="col-text">
 
@@ -53,18 +54,18 @@
 
 					</div> <!-- /col-text -->
 
-					<div class="col-more"><a href="#"><img src="http://127.0.0.1/CIEducationPortal/assets/design/cols3-more.gif" alt="" /></a></div>
+					<div class="col-more"><a href="#"><img src='<?php echo base_url();?>assets/design/cols3-more.gif' alt='' /></a></div>
 
 				</div> <!-- /col -->
 
         <hr class="noscreen" />
 
         <!-- Column II. -->
-				<div class="col">
+				<div class="col sec">
 
 					<h3><a href="#">Product II.</a></h3>
 
-					<p class="nom t-center"><a href="#"><img src="http://127.0.0.1/CIEducationPortal/assets/tmp/200x140.gif" alt="" /></a></p>
+					<p class="nom t-center"><a href="#"><img src='<?php echo base_url();?>assets/tmp/200x140.gif' alt='' /></a></p>
 
 					<div class="col-text">
 
@@ -79,7 +80,7 @@
 
 					</div> <!-- /col-text -->
 
-					<div class="col-more"><a href="#"><img src="http://127.0.0.1/CIEducationPortal/assets/design/cols3-more.gif" alt="" /></a></div>
+					<div class="col-more"><a href="#"><img src='<?php echo base_url();?>assets/design/cols3-more.gif' alt='' /></a></div>
 					
 				</div> <!-- /col -->
 
@@ -90,7 +91,7 @@
 
 					<h3><a href="#">Product III.</a></h3>
 
-					<p class="nom t-center"><a href="#"><img src="http://127.0.0.1/CIEducationPortal/assets/tmp/200x140.gif" alt="" /></a></p>
+					<p class="nom t-center"><a href="#"><img src='<?php echo base_url();?>assets/tmp/200x140.gif' alt='' /></a></p>
 
 					<div class="col-text">
 
@@ -105,12 +106,16 @@
 
 					</div> <!-- /col-text -->
 
-					<div class="col-more"><a href="#"><img src="http://127.0.0.1/CIEducationPortal/assets/design/cols3-more.gif" alt="" /></a></div>
+					<div class="col-more"><a href="#"><img src='<?php echo base_url();?>assets/design/cols3-more.gif' alt='' /></a></div>
 
 				</div> <!-- /col -->
 
         <hr class="noscreen" />
     
 		</div> <!-- /cols3 -->
-
+		<div id="cols3-bottom">
+	
+		</div>
+		
 		<hr class="noscreen" />
+		

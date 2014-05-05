@@ -11,11 +11,11 @@
     <meta name="description" content="..." />
     <meta name="keywords" content="..." />
 	
-	<link rel="stylesheet" media="screen,projection" type="text/css" href="http://127.0.0.1/CIEducationPortal/assets/css/reset.css" />
-    <link rel="stylesheet" media="screen,projection" type="text/css" href="http://127.0.0.1/CIEducationPortal/assets/css/main.css" />
-	<!--[if lte IE 6]><link rel="stylesheet" type="text/css" href="css/main-msie.css" /><![endif]-->
-    <link rel="stylesheet" media="screen,projection" type="text/css" href="http://127.0.0.1/CIEducationPortal/assets/css/style.css" />
-    <link rel="stylesheet" media="print" type="text/css" href="http://127.0.0.1/CIEducationPortal/assets/css/print.css" />
+	<link rel="stylesheet" media="screen,projection" type="text/css" href='<?php echo base_url() ?>assets/css/reset.css' />
+    <link rel="stylesheet" media="screen,projection" type="text/css" href='<?php echo base_url() ?>assets/css/main.css' />
+	<!--[if lte IE 6]><link rel="stylesheet" type="text/css" href='<?php echo base_url() ?>assets/css/main-msie.css' /><![endif]-->
+    <link rel="stylesheet" media="screen,projection" type="text/css" href='<?php echo base_url() ?>assets/css/style.css' />
+    <link rel="stylesheet" media="print" type="text/css" href='<?php echo base_url() ?>assets/css/print.css' />
 
 	<title>DPU - Education Portal</title>
 	
@@ -37,7 +37,7 @@
 <body>
 	<div id="main">
 		<div id="header">
-			<div id="logo"><h1 id="logo"><a href="./" title="[Go to homepage]"><img src="http://127.0.0.1/CIEducationPortal/assets/tmp/logo.gif" alt="" /></a></h1>
+			<div id="logo"><h1 id="logo"><a href='<?php echo site_url('home');?>' title='Go To HomePage'><img src='<?php echo base_url() ?>assets/tmp/logo.gif' alt='' /></a></h1>
 			<hr class="noscreen" />
         
 			<div id="nav">
