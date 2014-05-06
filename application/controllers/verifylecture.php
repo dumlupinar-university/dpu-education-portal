@@ -24,8 +24,9 @@ class VerifyLecture extends CI_Controller {
 
 		if( $this->form_validation->run() == FALSE )
 		{
+			$data['status'] = 2;
 			$this->load->view('header');
-			$this->load->view('menu_teacher');
+			$this->load->view('menu',$data);
 			$this->load->view('content_addlecture');
 			$this->load->view('footer');
 		}
@@ -105,8 +106,9 @@ class VerifyLecture extends CI_Controller {
 	
 	public function successfull($data)
 	{
+		$data['status'] = 2;
 		$this->load->view('header');
-		$this->load->view('menu_teacher');
+		$this->load->view('menu',$data);
 		$this->load->view('content_addlecture_successfull',$data);
 		$this->load->view('footer');
 	}

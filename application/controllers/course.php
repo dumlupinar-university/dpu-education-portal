@@ -7,7 +7,6 @@ class Course extends CI_Controller {
 	function __constructor()
 	{
 		parent::__constructor();
-		
 	}
 
 	public function index()
@@ -126,28 +125,28 @@ class Course extends CI_Controller {
 			}
 			else if ( $data['authority'] == 1 )
 			{
-				$courseDetails['status'] = 1;
-				$this->load->view('menu',$courseDetails);
+				$data['status'] = 1;
+				$this->load->view('menu',$data);
 				$this->load->view('content_course_detail',$courseDetails);
 			}
 			else if ( $data['authority'] == 2 )
 			{
-				$courseDetails['status'] = 2;
-				$this->load->view('menu',$courseDetails);
+				$data['status'] = 2;
+				$this->load->view('menu',$data);
 				$this->load->view('content_course_detail',$courseDetails);
 			}
 			else if ( $data['authority'] == 3 )
 			{
-				$courseDetails['status'] = 3;
-				$this->load->view('menu',$courseDetails);
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
 				$this->load->view('content_course_detail',$courseDetails);
 			}
 			
 		}
 		else
 		{
-			$courseDetails['status'] = 4;
-			$this->load->view('menu',$courseDetails);
+			$data['status'] = 4;
+			$this->load->view('menu',$data);
 			$this->load->view('content_course_detail',$courseDetails);
 		}
 		
@@ -207,6 +206,7 @@ class Course extends CI_Controller {
 	
 	function buy_course($id,$validationDate)
 	{
+		$this->load->helper('date');
 		$this->load->view('header');
 		
 		$this->load->model('course_model','',TRUE);
@@ -221,8 +221,33 @@ class Course extends CI_Controller {
 			$data['surname'] = $session_data['surname'];
 			$data['id'] = $session_data['id'];
 			
-			if ( $this->user_model->get_user_credit($data['id']) >= $this->course_model->get_course_credit($id,$validationDate) )
+			$data['userCredit'] = $this->user_model->get_user_credit($data['id']);
+			$data['courseCredit'] = $this->course_model->get_course_credit($id,$validationDate);
+
+			if ( $data['userCredit'] >= $data['courseCredit'] )
 			{
+				$data['course'] = $id;
+				$data['validationDate'] = $validationDate;
+				$data['buyingdate'] = date('Y-m-d H:i:s', now());
+				
+				$buyingDate = date('Y-m-d H:i:s', now());
+				$buyingDateTimestamp = strtotime($buyingDate);
+				
+				if ( $validationDate == 3 ) 
+				{
+					$validateDate = strtotime("+3 months", $buyingDateTimestamp);
+				}
+				else if ( $validationDate == 6 ) 
+				{
+					$validateDate = strtotime("+6 months", $buyingDateTimestamp);
+				}
+				else if ( $validationDate == 12 ) 
+				{
+					$validateDate = strtotime("+12 months", $buyingDateTimestamp);
+				}
+				
+				$validateDate = date('Y-m-d H:i:s', $validateDate);;
+				$data['validate'] = $validateDate;
 				
 				if ( $data['authority'] == 0 )
 				{
@@ -232,31 +257,51 @@ class Course extends CI_Controller {
 				{
 					$data['status'] = 1;
 					$this->load->view('menu',$data);
+					$this->course_model->buy_course_now($data);
+					$this->load->view('content_buy_course_successfull',$data);
 					
 				}
 				else if ( $data['authority'] == 2 )
 				{
 					$data['status'] = 2;
 					$this->load->view('menu',$data);
-					
+					$this->course_model->buy_course_now($data);
+					$this->load->view('content_buy_course_successfull',$data);
 				}
-				else if ( $data['authority'] == 3 )
+				else
 				{
-					$data['status'] = 3;
-					$this->load->view('menu',$data);
-					
+					redirect('home','refresh');
 				}
 			}
 			else
 			{
-				// you don't have enough credit
+				if ( $data['authority'] == 0 )
+				{
+					redirect('home','refresh');
+				}
+				else if ( $data['authority'] == 1 )
+				{
+					$data['status'] = 1;
+					$this->load->view('menu',$data);
+					$this->load->view('content_buy_course_unsuccessfull',$data);
+					
+				}
+				else if ( $data['authority'] == 2 )
+				{
+					$data['status'] = 2;
+					$this->load->view('menu',$data);
+					$this->load->view('content_buy_course_unsuccessfull',$data);
+				}
+				else
+				{
+					redirect('home','refresh');
+				}
 			}
 			
 		}
 		else
 		{
-			$data['status'] = 4;
-			$this->load->view('menu',$data);
+			redirect('home','refresh');
 		}
 		
 		$this->load->view('footer');

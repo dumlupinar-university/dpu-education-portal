@@ -56,6 +56,25 @@ class User_Model extends CI_Model {
 		
 	}
 	
+	function edit_profile($data)
+	{
+		$this->db->select('*');
+		$this->db->from('usersinfos');
+		$this->db->where('user',$data['id']);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() == 0 )
+		{
+			$this->db->insert();
+		}
+		else
+		{
+			$this->db->where('user',$data['id']);
+			$this->db->update('usersinfos',$data);
+		}	
+	}
+	
 	function get_user_list()
 	{
 		$this->db->select('*');
@@ -171,7 +190,8 @@ class User_Model extends CI_Model {
 		
 		if ( $query->num_rows() > 0 )
 		{
-			return $query->result();
+			$row = $query->row();
+			return $row->credit;
 		}
 		else
 		{

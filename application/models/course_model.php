@@ -289,34 +289,85 @@ class Course_model extends CI_Model {
 		if ( $validationDate == 3 )
 		{
 			$this->db->select('creditforthree');
+			$this->db->from('coursescredits');
+			$this->db->where('course',$id);
+		
+			$query = $this->db->get();
+		
+			if ( $query->num_rows() == 1 )
+			{	
+				$row = $query->row();
+				return $row->creditforthree;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		else if ( $validationDate == 6 )
 		{
 			$this->db->select('creditforsix');
+			$this->db->from('coursescredits');
+			$this->db->where('course',$id);
+		
+			$query = $this->db->get();
+		
+			if ( $query->num_rows() == 1 )
+			{	
+				$row = $query->row();
+				return $row->creditforsix;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		else if ( $validationDate == 12 )
 		{
 			$this->db->select('creditforyear');
+			$this->db->from('coursescredits');
+			$this->db->where('course',$id);
+		
+			$query = $this->db->get();
+			
+			if ( $query->num_rows() == 1 )
+			{	
+				$row = $query->row();
+				return $row->creditforyear;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		else
 		{
 			return false;
 		}
 		
-		$this->db->from('coursescredits');
-		$this->db->where('course',$id);
 		
-		$query = $this->db->get();
+	}
+	
+	function buy_course_now($data)
+	{
+		$updateDate = array (
+			'user' => $data['id'],
+			'credit' => $data['userCredit'] - $data['courseCredit'],
+			'creditlastchangedate' => $data['buyingdate']
+		);
 		
-		if ( $query->num_rows() == 1 )
-		{
-			return $query->result();
-		}
-		else
-		{
-			return false;
-		}
 		
+		$this->db->where('user',$data['id']);
+		$this->db->update('userscredits',$updateDate);
+		
+		$info = array(
+				    'course' => $data['course'],
+					'user' => $data['id'],
+					'validate' => $data['validate'],
+					'buyingdate' => $data['buyingdate']
+			);
+			
+		$this->db->insert('userscourses',$info);
 	}
 }
 

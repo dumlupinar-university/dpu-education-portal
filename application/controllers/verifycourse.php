@@ -25,16 +25,19 @@ class VerifyCourse extends CI_Controller {
 
 		if( $this->form_validation->run() == FALSE )
 		{
+			$data['status'] = 2;
 			$this->load->view('header');
-			$this->load->view('menu_teacher');
+			$this->load->view('menu',$data);
 			$this->load->view('content_addcourse');
 			$this->load->view('footer');
+			$this->load->view('header');
+
 		}
 		else
 		{
 			
 		}
-
+		
 	}
 	
 	public function check_database($name)
@@ -91,11 +94,11 @@ class VerifyCourse extends CI_Controller {
 
 	}
 	
-	public function successfull($dataCourse)
+	public function successfull($data)
 	{
 		$this->load->view('header');
-		$this->load->view('menu_teacher');
-		$this->load->view('content_addcourse_successfull',$dataCourse);
+		$this->load->view('menu',$data);
+		$this->load->view('content_add_course_successfull',$data);
 		$this->load->view('footer');
 	}
 
@@ -124,11 +127,11 @@ class VerifyCourse extends CI_Controller {
 			else if ( $data['authority'] == 2 )
 			{
 				
-				$config['upload_path']   =   "uploads/";
+				$config['upload_path']   =   "images/course/";
 				$config['allowed_types'] =   "gif|jpg|jpeg|png"; 
 				$config['max_size']      =   "5000";
-				$config['max_width']     =   "1907";
-				$config['max_height']    =   "1280";
+				$config['max_width']     =   "320";
+				$config['max_height']    =   "100";
 				$this->load->library('upload',$config);
 
 				if(!$this->upload->do_upload('picture'))
@@ -145,11 +148,11 @@ class VerifyCourse extends CI_Controller {
 			}
 			else
 			{
-				$config['upload_path']   =   "uploads/";
+				$config['upload_path']   =   "images/course/";
 				$config['allowed_types'] =   "gif|jpg|jpeg|png"; 
 				$config['max_size']      =   "5000";
-				$config['max_width']     =   "1907";
-				$config['max_height']    =   "1280";
+				$config['max_width']     =   "320";
+				$config['max_height']    =   "100";
 				$this->load->library('upload',$config);
 
 				if(!$this->upload->do_upload('picture'))
@@ -176,7 +179,7 @@ class VerifyCourse extends CI_Controller {
 	function _createThumbnail($filename)
 	{
         $config['image_library']    = "gd2";      
-        $config['source_image']     = "uploads/" .$filename;      
+        $config['source_image']     = "images/course/" .$filename;      
         $config['create_thumb']     = TRUE;      
         $config['maintain_ratio']   = TRUE;      
 		$config['width'] = "80";      
