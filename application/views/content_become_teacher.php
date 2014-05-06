@@ -8,6 +8,10 @@
 		<?php echo form_open('verifyteacher'); ?>
 			<table>
 				<tr>
+					<td><label for="cv">Cv</label></td>
+					<td>:<input type="file" id="cv" name="cv"/></td>
+				</tr>
+				<tr>
 					<td></td>
 					<td><input type="submit" value="Become A Teacher"/></td>
 				</tr>

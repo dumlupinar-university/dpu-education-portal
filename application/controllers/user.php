@@ -275,6 +275,7 @@ class User extends CI_Controller {
 	{
 		
 		$this->load->view('header');
+		$this->load->helper('form');
 		
 		if( $this->session->userdata('logged_in') )
 		{
@@ -297,19 +298,19 @@ class User extends CI_Controller {
 			{
 				$userDetails['status'] = 1;
 				$this->load->view('menu',$userDetails);
-				$this->load->view('content_user_detail',$userDetails);
+				$this->load->view('content_edit_profile',$userDetails);
 			}
 			else if ( $data['authority'] == 2 )
 			{		
 				$userDetails['status'] = 2;
 				$this->load->view('menu',$userDetails);
-				$this->load->view('content_user_detail',$userDetails);
+				$this->load->view('content_edit_profile',$userDetails);
 			}
 			else if ( $data['authority'] == 3 )
 			{
 				$userDetails['status'] = 3;
 				$this->load->view('menu',$userDetails);
-				$this->load->view('content_user_detail',$userDetails);
+				$this->load->view('content_edit_profile',$userDetails);
 			}
 			
 		}
