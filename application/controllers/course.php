@@ -102,6 +102,7 @@ class Course extends CI_Controller {
 	
 	public function get_course($id)
 	{
+		$this->load->helper('date');
 		$this->load->model('course_model','',TRUE);
 		
 		$courseDetails['results'] = $this->course_model->get_course($id);
@@ -116,7 +117,9 @@ class Course extends CI_Controller {
 			$data['surname'] = $session_data['surname'];
 			$data['id'] = $session_data['id'];
 			
-			$courseDetails['status'] = $this->course_model->check_status($id,$data['id']);
+			$now = date('Y-m-d H:i:s', now());
+			
+			$courseDetails['status'] = $this->course_model->check_status($id,$data['id'],$now);
 			$courseDetails['prizes'] = $this->course_model->get_course_prizes($id);
 			
 			if ( $data['authority'] == 0 )
@@ -309,11 +312,9 @@ class Course extends CI_Controller {
 	
 	function purchased()
 	{
-		$this->load->model('course_model','',TRUE);
-		
 		$this->load->view('header');
-		
-		
+		$this->load->model('course_model','',TRUE);
+		$this->load->helper('date');
 		
 		if( $this->session->userdata('logged_in') )
 		{
@@ -324,7 +325,9 @@ class Course extends CI_Controller {
 			$data['surname'] = $session_data['surname'];
 			$data['id'] = $session_data['id'];
 			
-			$data['results'] = $this->course_model->get_purchased_list($data['id']);
+			$now = date('Y-m-d H:i:s', now());
+			
+			$data['results'] = $this->course_model->get_purchased_list($data['id'],$now);
 			
 			if ( $data['authority'] == 0 )
 			{

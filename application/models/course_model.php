@@ -158,7 +158,7 @@ class Course_model extends CI_Model {
 		}
 	}
 	
-	function get_purchased_list($id)
+	function get_purchased_list($id,$now)
 	{
 		$this->db->select('C.id AS idC, C.name AS nameC, C.teacher, C.picture ,
 						   U.id AS idU, U.name AS nameU, U.surname,
@@ -168,6 +168,7 @@ class Course_model extends CI_Model {
 		$this->db->join('coursesinfos AS L','L.course = C.id','INNER');
 		$this->db->join('userscourses','userscourses.course = C.id','INNER');
 		$this->db->where('userscourses.user',$id);
+		$this->db->where('userscourses.validate >',$now);
 		$this->db->where('status',1);
 		
 		$query = $this->db->get();
@@ -190,17 +191,16 @@ class Course_model extends CI_Model {
 							U.name nameU, U.surname, U.id idU, 
 							I.description, I.updateddate updateddateI, I.createddate,
 							L.creditforthree, L.creditforsix, L.creditforyear, L.updateddate updateddateL');
-		$this->db->from('courses AS C , users AS U , coursesinfos AS I , coursescredits AS L');
-		$this->db->join('users','C.teacher = U.id','INNER');
-		$this->db->join('coursesinfos','I.course = C.id','INNER');
-		$this->db->join('coursescredits','L.course = C.id' ,'INNER');
+		$this->db->from('courses AS C');
+		$this->db->join('users AS U','C.teacher = U.id','INNER');
+		$this->db->join('coursesinfos AS I','I.course = C.id','INNER');
+		$this->db->join('coursescredits AS L','L.course = C.id' ,'INNER');
 		$this->db->where('C.id',$id);
 		$this->db->where('status',1);
-		$this->db->limit(1);
 		
 		$query = $this->db->get();
 
-		if( $query->num_rows() > 0 )
+		if( $query->num_rows() == 1 )
 		{
 			return $query->result();
 		}
@@ -251,7 +251,7 @@ class Course_model extends CI_Model {
 		}
 	}
 	
-	function check_status($id,$userid)
+	function check_status($id,$userid,$now)
 	{
 		$this->db->select('*');
 		$this->db->from('courses');
@@ -270,6 +270,7 @@ class Course_model extends CI_Model {
 			$this->db->from('userscourses');
 			$this->db->where('user',$userid);
 			$this->db->where('course',$id);
+			$this->db->where('validate >',$now);
 		
 			$query = $this->db->get();
 			

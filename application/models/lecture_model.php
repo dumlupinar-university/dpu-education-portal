@@ -63,8 +63,8 @@ class Lecture_model extends CI_Model {
 	{
 		$this->db->select('L.id AS idL, L.name AS nameL, L.course , L.description , L.key ,
 							C.name AS nameC ,C.id AS idC');
-		$this->db->from('lectures AS L , courses AS C');
-		$this->db->join('courses','L.course = courses.id','LEFT');
+		$this->db->from('lectures AS L');
+		$this->db->join('courses AS C','L.course = C.id','INNER');
 		$this->db->join('userscourses','L.course = userscourses.course','INNER'); 
 		$this->db->where('userscourses.user',$id);
 		$this->db->where('L.id',$lectureid);
@@ -72,7 +72,7 @@ class Lecture_model extends CI_Model {
 		
 		$query = $this->db->get();
 		
-		if( $query->num_rows() > 0 )
+		if( $query->num_rows() == 1 )
 		{
 			$row = $query->row();
 			return $row;
@@ -81,14 +81,15 @@ class Lecture_model extends CI_Model {
 		{
 			$this->db->select('L.id AS idL, L.name AS nameL, L.course , L.description , L.key ,
 							C.name AS nameC ,C.id AS idC');
-			$this->db->from('lectures AS L , courses AS C');
-			$this->db->join('courses','courses.id = L.course','INNER'); 
-			$this->db->where('courses.teacher',$id);
+			$this->db->from('lectures AS L');
+			$this->db->join('courses AS C','C.id = L.course','INNER'); 
 			$this->db->where('L.id',$lectureid);
+			$this->db->where('C.teacher',$id);
+			
 			
 			$query = $this->db->get();
 			
-			if( $query->num_rows() > 0 )
+			if( $query->num_rows() == 1 )
 			{
 				$row = $query->row();
 				return $row;
@@ -126,6 +127,7 @@ class Lecture_model extends CI_Model {
 		$this->db->insert('lectures',$data);
 	}
 	
+	
 	function get_lecture_status($course,$userid)
 	{
 		$this->db->select('*');
@@ -135,7 +137,7 @@ class Lecture_model extends CI_Model {
 		
 		$query = $this->db->get();
 		
-		if ( $query->num_rows() > 0 )
+		if ( $query->num_rows() == 1 )
 		{
 			return 3;
 		}
@@ -148,7 +150,7 @@ class Lecture_model extends CI_Model {
 		
 			$query = $this->db->get();
 			
-			if ( $query->num_rows() > 0 )
+			if ( $query->num_rows() == 1 )
 			{
 				return 2;
 			}

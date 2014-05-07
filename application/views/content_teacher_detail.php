@@ -11,8 +11,11 @@
 			$name = $row->name;
 			$surname = $row->surname;
 			$email = $row->email;
+			$photo = $row->photo;
 		}
-
+	
+		echo '<div id="image"><img src='.base_url(). 'images/profile/' .$photo.'></div>';
+		
 		echo '<p><h2><em>Instructor</em></h2></p>';
 		
 		echo '<p>Name : '.$name.'</p>';

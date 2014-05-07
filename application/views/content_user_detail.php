@@ -21,6 +21,7 @@
 	
 	if ( !empty($infos) )
 	{
+		echo '<div id="image"><img src='.base_url(). 'images/profile/' .$infos->photo.'></div>';
 		
 		echo '<p>Phone : '.$infos->phone.'</p>';
 		 
@@ -31,8 +32,6 @@
 		echo '<p>Birthday : '.$infos->birthday.'</p>';
 		 
 		echo '<p>Address :'.$infos->address.'</p>';
-		
-		echo '<p>Photo :'.$infos->photo.'</p>';
 		
 		echo '<p>Cv : '.$infos->cv.'</p>';
 		 

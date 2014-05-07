@@ -28,7 +28,7 @@ class Lecture extends CI_Controller {
 			
 			$data['header'] = "Lectures";
 			
-			$data['status'] = $this->lecture_model->get_lecture_status($course,$data['id']);
+			$data['lecstatus'] = $this->lecture_model->get_lecture_status($course,$data['id']);
 			
 			if ( !$this->lecture_model->get_list($course,$data['id']) )
 			{
@@ -106,13 +106,13 @@ class Lecture extends CI_Controller {
 				}
 				else if ( $data['authority'] == 2 )
 				{
-					$data['status'] = 1;
+					$data['status'] = 2;
 					$this->load->view('menu',$data);
 					$this->load->view('content_lecture_detail',$lecture);
 				}
 				else if ( $data['authority'] == 3 )
 				{
-					$data['status'] = 1;
+					$data['status'] = 3;
 					$this->load->view('menu',$data);
 					$this->load->view('content_lecture_detail',$lecture);
 				}

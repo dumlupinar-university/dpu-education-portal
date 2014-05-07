@@ -90,6 +90,7 @@
 						$teacherName = $row->nameU;
 						$teacherSurname = $row->surname;
 						$teacherId = $row->idU;
+						$picture = $row->picture;
 						$i++;
 						
 
@@ -97,7 +98,7 @@
 
 					<h3><a href='.site_url('course/get_course/'.$courseId.'').'>'.$courseName.'</a></h3>
 					
-						<p class="nom t-center"><a href='.site_url('course/get_course/'.$courseId.'').'><img src="'.base_url().'assets/tmp/200x140.gif" alt="" /></a></p>
+						<p class="nom t-center"><a href='.site_url('course/get_course/'.$courseId.'').'><img src="'.base_url().'images/course/'.$picture.'" alt="" /></a></p>
 
 						<div class="col-text">
 

@@ -60,18 +60,18 @@ class User_Model extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('usersinfos');
-		$this->db->where('user',$data['id']);
+		$this->db->where('user',$data['user']);
 		
 		$query = $this->db->get();
 		
-		if ( $query->num_rows() == 0 )
+		if ( $query->num_rows() == 1 )
 		{
-			$this->db->insert();
+			$this->db->where('user',$data['user']);
+			$this->db->update('usersinfos',$data);
 		}
 		else
 		{
-			$this->db->where('user',$data['id']);
-			$this->db->update('usersinfos',$data);
+			return false;
 		}	
 	}
 	
@@ -137,8 +137,9 @@ class User_Model extends CI_Model {
 	
 	function get_teacher($id)
 	{
-		$this->db->select('*');
+		$this->db->select('users.* ,usersinfos.photo');
 		$this->db->from('users');
+		$this->db->join('usersinfos','users.id = usersinfos.user','INNER');
 		$this->db->where('id',$id);
 		$this->db->where('authority',2);
 		

@@ -3,6 +3,7 @@
 <div id="lastest-post">
 
 <?php
+
 	if ( !empty($result) )
 	{
 
@@ -16,6 +17,9 @@
 				<source src='.base_url(). 'videos/' .$result->key.' type="video/mp4">
 			</video></center>';
 	}
+	
+	echo '<p><a href='.site_url('lecture/get_lecture_list/'.$result->idC.'').'>Click Here To Go Back To Lectures</a></p>';
+	
 ?>
 
 </div>

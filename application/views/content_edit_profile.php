@@ -4,7 +4,7 @@
 	<center>
 		<h2>Edit Profile</h2>
 		<?php echo validation_errors(); ?>
-		<?php echo form_open('verifyprofile'); ?>
+		<?php echo form_open_multipart('verifyprofile'); ?>
 			<table>
 				<tr>
 					<td><label for="Skype">Skype</label></td>
@@ -23,19 +23,19 @@
 					<td>:<input type="text" size="20" id="birthday" name="birthday" value="<?php echo set_value('birthday') ?>"/></td>
 				</tr>
 				<tr>
-					<td><label for="description">Description</label></td>
+					<td><label for="Description">Description</label></td>
 					<td>:<textarea id="description" name="description" cols="30" rows="10" value="<?php echo set_value('description') ?>"></textarea></td>
 				</tr>
 				<tr>
-					<td><label for="address">Address</label></td>
+					<td><label for="Address">Address</label></td>
 					<td>:<textarea id="address" name="address" cols="30" rows="10" value="<?php echo set_value('address') ?>"></textarea></td>
 				</tr>
 				<tr>
-					<td><label for="photo">Photo</label></td>
+					<td><label for="Photo">Photo</label></td>
 					<td>:<input type="file" id="photo" name="photo"/></td>
 				</tr>
 				<tr>
-					<td><label for="cv">Cv</label></td>
+					<td><label for="Cv">Cv</label></td>
 					<td>:<input type="file" id="cv" name="cv"/></td>
 				</tr>
 				<tr>

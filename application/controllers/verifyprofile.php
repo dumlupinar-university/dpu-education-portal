@@ -71,11 +71,14 @@ class VerifyProfile extends CI_Controller {
 	
 	public function add_to_database($data)
 	{
+		$photoName = explode('.',$_FILES['photo']['name']);
+		//$cvName = exploade('.',$_FILES['cv']['name']);
+		
 		$profile = array(
-				'id' => $data['id'];
+				'user' => $data['id'],
 				'phone' => $this->input->post('phone'),
-				'photo' => $this->input->post('photo'),
-				'cv' => $this->input->post('cv'),
+				'photo' => $data['id'].'.'.$photoName[1],
+				'cv' => $data['id'].'.'.$photoName[1],
 				'skype' => $this->input->post('skype'), 
 				'description' => $this->input->post('description'), 
 				'address' => $this->input->post('address'), 
@@ -84,6 +87,8 @@ class VerifyProfile extends CI_Controller {
 		);
 		
 		$this->user_model->edit_profile($profile);
+		$profile['status'] = $data['authority'];
+		$this->successfull($profile);
 		
 	}
 	
@@ -114,7 +119,7 @@ class VerifyProfile extends CI_Controller {
 				$config['max_height']    =   "100";
 				$this->load->library('upload',$config);
 
-				if(!$this->upload->do_upload('picture'))
+				if(!$this->upload->do_upload('photo'))
 				{
 					echo $this->upload->display_errors();
 				}
@@ -123,7 +128,7 @@ class VerifyProfile extends CI_Controller {
 					$finfo = $this->upload->data();
 					$this->_createThumbnail($finfo['file_name']);
 					$data['uploadInfo'] = $finfo;
-					$data['thumbnail_name'] = $finfo['raw_name']. '_thumb' .$finfo['file_ext']; 
+					$data['thumbnail_name'] = $finfo['raw_name']. '' .$finfo['file_ext']; 
 					$this->add_to_database($data);
 				}
 			}
@@ -137,7 +142,7 @@ class VerifyProfile extends CI_Controller {
 				$config['max_height']    =   "1280";
 				$this->load->library('upload',$config);
 
-				if(!$this->upload->do_upload('picture'))
+				if(!$this->upload->do_upload('photo'))
 				{
 					echo $this->upload->display_errors();
 				}
@@ -146,7 +151,7 @@ class VerifyProfile extends CI_Controller {
 					$finfo = $this->upload->data();
 					$this->_createThumbnail($finfo['file_name']);
 					$data['uploadInfo'] = $finfo;
-					$data['thumbnail_name'] = $finfo['raw_name']. '_thumb' .$finfo['file_ext'];
+					$data['thumbnail_name'] = $finfo['raw_name']. '' .$finfo['file_ext'];
 					$this->add_to_database($data);
 				}
 			}
@@ -159,7 +164,7 @@ class VerifyProfile extends CI_Controller {
 				$config['max_height']    =   "1280";
 				$this->load->library('upload',$config);
 
-				if(!$this->upload->do_upload('picture'))
+				if(!$this->upload->do_upload('photo'))
 				{
 					echo $this->upload->display_errors();
 				}
@@ -168,7 +173,7 @@ class VerifyProfile extends CI_Controller {
 					$finfo = $this->upload->data();
 					$this->_createThumbnail($finfo['file_name']);
 					$data['uploadInfo'] = $finfo;
-					$data['thumbnail_name'] = $finfo['raw_name']. '_thumb' .$finfo['file_ext']; 
+					$data['thumbnail_name'] = $finfo['raw_name']. '' .$finfo['file_ext']; 
 					$this->add_to_database($data);
 				}
 			}
@@ -196,8 +201,8 @@ class VerifyProfile extends CI_Controller {
         $config['source_image']     = "images/profile/" .$filename;      
         $config['create_thumb']     = TRUE;      
         $config['maintain_ratio']   = TRUE;      
-		$config['width'] = "80";      
-        $config['height'] = "80";
+		$config['width'] = "200";      
+        $config['height'] = "200";
         $this->load->library('image_lib',$config);
 
         if(!$this->image_lib->resize())

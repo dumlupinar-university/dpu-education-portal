@@ -20,7 +20,7 @@
 		echo '</ul>';
 		}
 
-		if ( $status == 3 )
+		if ( $lecstatus == 3 )
 		{
 			echo '<p><a href='.site_url('lecture/add_lecture/'.$course.'').'>Click Here To Add New Lectures</a></p>';
 		}

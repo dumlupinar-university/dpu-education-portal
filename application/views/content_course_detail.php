@@ -10,6 +10,8 @@
 		
 			$id = $row->id;
 			
+		echo '<div id="image"><img src='.base_url(). 'images/course/' .$row->picture.'></div>';
+			
 		echo '<p><b>Name</b>			: '.$row->nameC.'</p>';
 		
 		echo '<p><b>Description</b>		: '.$row->description.'</p>';
@@ -20,8 +22,6 @@
 		
 		echo '<p><b>Last Update</b>		: '.$row->updateddateI.'</p>';
 		
-		echo '<p><b>Photo</b>			: <img src='.base_url(). 'uploads/' .$row->picture.'></p>';
-
 			
 			if ( $status == 3 )
 			{
@@ -31,7 +31,7 @@
 			{
 				echo '<p><b><a href='.site_url('lecture/get_lecture_list/'.$row->id.'').'>Click To Go Lectures</a></p></b>';
 			}
-			else if ( $status == 0 )
+			else if ( $status == 4 )
 			{
 				echo '<p><b><a href='.site_url('login').'>Click here to Login</a></b></p>';
 			}
