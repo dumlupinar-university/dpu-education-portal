@@ -54,7 +54,41 @@ class User_Model extends CI_Model {
 		
 		$this->db->insert('usersactivationcodes',$usersactivationcodes);
 		
+		$this->db->select('id');
+		$this->db->from('users');
+		$this->db->where('email',$data['email']);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() == 1 )
+		{			
+			$usersinfos = array(
+				'user' => $query->row()->id,
+				'phone' => null,
+				'skype' => null,
+				'facebook' => null,
+				'birthday' => null,
+				'address' => null,
+				'description' => null,
+				'photo' => null,
+				'cv' => null,				
+			);
+			
+			$this->db->insert('usersinfos',$usersinfos);
+			
+			$userscredits = array(
+				'user' => $query->row()->id,
+				'credit' => 0,
+			);
+			
+			$this->db->insert('userscredits',$userscredits);
+		}
+		else
+		{	
+			return false;
+		}
 	}
+	
 	
 	function edit_profile($data)
 	{

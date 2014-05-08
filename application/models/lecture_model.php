@@ -16,10 +16,7 @@ class Lecture_model extends CI_Model {
 		{
 			return $query->result();
 		}
-		else
-		{
-			return false;
-		}
+
 	}
 	
 	
@@ -45,6 +42,7 @@ class Lecture_model extends CI_Model {
 			$this->db->join('courses','L.course = courses.id','INNER'); 
 			$this->db->where('courses.teacher',$id);
 			$this->db->where('courses.id',$course);
+			$this->db->where('L.status',1);
 			
 			$query = $this->db->get();
 		
@@ -52,11 +50,26 @@ class Lecture_model extends CI_Model {
 			{
 				return $query->result();
 			}
-			else
-			{
-				return false;
-			}
+
 		}
+	}
+	
+	function get_list_not_confirmed($course,$id)
+	{
+			$this->db->select('L.id, L.name, L.course , L.description');
+			$this->db->from('lectures AS L');
+			$this->db->join('courses','L.course = courses.id','INNER'); 
+			$this->db->where('courses.teacher',$id);
+			$this->db->where('courses.id',$course);
+			$this->db->where('L.status',0);
+			
+			$query = $this->db->get();
+		
+			if( $query->num_rows() > 0 )
+			{
+				return $query->result();
+			}
+
 	}
 	
 	function get_lecture($lectureid,$id)

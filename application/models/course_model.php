@@ -30,6 +30,23 @@ class Course_model extends CI_Model {
 			
 	}
 	
+	
+	function get_course_comments($id)
+	{
+		$this->db->select('coursecomments.id, coursecomments.comment, coursecomments.date,
+							users.name, users.surname');
+		$this->db->from('coursecomments');
+		$this->db->join('users','users.id = coursecomments.user','INNER');
+		$this->db->where('course',$id);
+		$this->db->where('coursecomments.status',1);
+		
+		$query = $this->db->get();
+		
+		return $query->result();
+		
+	}
+	
+	
 	function get_full_course_list()
 	{
 		$this->db->select('C.id AS idC, C.name AS nameC, C.teacher, C.picture, C.status ,
@@ -210,6 +227,31 @@ class Course_model extends CI_Model {
 		}
 	}
 	
+	function get_course_not_confirmed($id)
+	{
+		$this->db->select('C.id, C.picture, C.name nameC, 
+							U.name nameU, U.surname, U.id idU, 
+							I.description, I.updateddate updateddateI, I.createddate,
+							L.creditforthree, L.creditforsix, L.creditforyear, L.updateddate updateddateL');
+		$this->db->from('courses AS C');
+		$this->db->join('users AS U','C.teacher = U.id','INNER');
+		$this->db->join('coursesinfos AS I','I.course = C.id','INNER');
+		$this->db->join('coursescredits AS L','L.course = C.id' ,'INNER');
+		$this->db->where('C.id',$id);
+		$this->db->where('status',0);
+		
+		$query = $this->db->get();
+
+		if( $query->num_rows() == 1 )
+		{
+			return $query->result();
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	function get_course_prizes($id)
 	{
 		$this->db->select('L.course , L.creditforthree, L.creditforsix, L.creditforyear');
@@ -238,6 +280,29 @@ class Course_model extends CI_Model {
 		$this->db->join('coursesinfos AS L','L.course = C.id','INNER');
 		$this->db->where('teacher',$teacher);
 		$this->db->where('status',1);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() > 0 )
+		{
+			return $query->result();
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	function get_teacher_course_list_not_confirmed($teacher)
+	{
+		$this->db->select('C.id AS idC, C.name AS nameC, C.teacher, C.picture ,
+						   U.id AS idU, U.name AS nameU, U.surname,
+						   L.description');
+		$this->db->from('courses AS C');
+		$this->db->join('users AS U','U.id = C.teacher','INNER');
+		$this->db->join('coursesinfos AS L','L.course = C.id','INNER');
+		$this->db->where('teacher',$teacher);
+		$this->db->where('status',0);
 		
 		$query = $this->db->get();
 		

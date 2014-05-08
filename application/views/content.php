@@ -1,5 +1,6 @@
 <?php
-	echo '<div id="col-top"></div>
+	echo '
+		<div id="col-top"></div>
 		<div id="col" class="box">
 		<div id="ribbon"></div>
 		<div id="latest-post" class="post">
@@ -26,8 +27,8 @@
 			<p>If you are a member just <strong><a href='.site_url('login').'>Click Here</a></strong> to Login :) ..</p>
 			
 			<p id="btns">
-				<a href='.site_url('login').'><img src="'.base_url().'assets/design/btn-tell.gif" alt="" /></a>
-				<a href='.site_url('register').'><img src="'.base_url().'assets/design/btn-purchase.gif" alt="" /></a>
+				<a href='.site_url('login').'><img src="'.base_url().'assets/design/btn-login.gif" alt="" /></a>
+				<a href='.site_url('register').'><img src="'.base_url().'assets/design/btn-register.gif" alt="" /></a>
 			</p>
 		';			
 			
@@ -50,10 +51,6 @@
 					
 			<p>Nice to see you again :) </p>
 			
-			<p id="btns">
-				<a href='.site_url('login').'><img src="'.base_url().'assets/design/btn-tell.gif" alt="" /></a>
-				<a href='.site_url('register').'><img src="'.base_url().'assets/design/btn-purchase.gif" alt="" /></a>
-			</p>
 		';		
 		}
 	}

@@ -27,39 +27,33 @@ class Lecture extends CI_Controller {
 			$this->load->model('lecture_model','',TRUE);
 			
 			$data['header'] = "Lectures";
-			
+			$data['courseId'] = $course;
 			$data['lecstatus'] = $this->lecture_model->get_lecture_status($course,$data['id']);
+	
+			$data['results'] = $this->lecture_model->get_list($course,$data['id']);
+			$data['nonresults'] = $this->lecture_model->get_list_not_confirmed($course,$data['id']);
 			
-			if ( !$this->lecture_model->get_list($course,$data['id']) )
+			if ( $data['authority'] == 0 )
 			{
 				redirect('home','refresh');
 			}
-			else
+			else if ( $data['authority'] == 1 )
 			{
-				$data['results'] = $this->lecture_model->get_list($course,$data['id']);
-			
-				if ( $data['authority'] == 0 )
-				{
-					redirect('home','refresh');
-				}
-				else if ( $data['authority'] == 1 )
-				{
-					$data['status'] = 1;
-					$this->load->view('menu',$data);
-					$this->load->view('content_lecture_list',$data);
-				}
-				else if ( $data['authority'] == 2 )
-				{
-					$data['status'] = 2;
-					$this->load->view('menu',$data);
-					$this->load->view('content_lecture_list',$data);
-				}
-				else if ( $data['authority'] == 3 )
-				{
-					$data['status'] = 3;
-					$this->load->view('menu',$data);
-					$this->load->view('content_lecture_list',$data);
-				}
+				$data['status'] = 1;
+				$this->load->view('menu',$data);
+				$this->load->view('content_lecture_list',$data);
+			}
+			else if ( $data['authority'] == 2 )
+			{
+				$data['status'] = 2;
+				$this->load->view('menu',$data);
+				$this->load->view('content_lecture_list',$data);
+			}
+			else if ( $data['authority'] == 3 )
+			{
+				$data['status'] = 3;
+				$this->load->view('menu',$data);
+				$this->load->view('content_lecture_list',$data);
 			}
 		}
 		else

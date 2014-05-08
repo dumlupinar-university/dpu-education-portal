@@ -77,7 +77,7 @@ class VerifyProfile extends CI_Controller {
 		$profile = array(
 				'user' => $data['id'],
 				'phone' => $this->input->post('phone'),
-				'photo' => $data['id'].'.'.$photoName[1],
+				'photo' => $data['id'].'_thumb.'.$photoName[1],
 				'cv' => $data['id'].'.'.$photoName[1],
 				'skype' => $this->input->post('skype'), 
 				'description' => $this->input->post('description'), 
@@ -128,7 +128,7 @@ class VerifyProfile extends CI_Controller {
 					$finfo = $this->upload->data();
 					$this->_createThumbnail($finfo['file_name']);
 					$data['uploadInfo'] = $finfo;
-					$data['thumbnail_name'] = $finfo['raw_name']. '' .$finfo['file_ext']; 
+					$data['thumbnail_name'] = $finfo['raw_name']. '_thumb' .$finfo['file_ext']; 
 					$this->add_to_database($data);
 				}
 			}
@@ -151,7 +151,7 @@ class VerifyProfile extends CI_Controller {
 					$finfo = $this->upload->data();
 					$this->_createThumbnail($finfo['file_name']);
 					$data['uploadInfo'] = $finfo;
-					$data['thumbnail_name'] = $finfo['raw_name']. '' .$finfo['file_ext'];
+					$data['thumbnail_name'] = $finfo['raw_name']. '_thumb' .$finfo['file_ext'];
 					$this->add_to_database($data);
 				}
 			}
@@ -173,7 +173,7 @@ class VerifyProfile extends CI_Controller {
 					$finfo = $this->upload->data();
 					$this->_createThumbnail($finfo['file_name']);
 					$data['uploadInfo'] = $finfo;
-					$data['thumbnail_name'] = $finfo['raw_name']. '' .$finfo['file_ext']; 
+					$data['thumbnail_name'] = $finfo['raw_name']. '_thumb' .$finfo['file_ext']; 
 					$this->add_to_database($data);
 				}
 			}

@@ -62,7 +62,7 @@ class VerifyCourse extends CI_Controller {
 					$dataCourse = array(
 						'name' => $this->input->post('name'),
 						'teacher' => $data['id'],
-						'picture' => $this->input->post('name').'.'.$pictureName[1],
+						'picture' => $this->input->post('name').'_thumb.'.$pictureName[1],
 						'description' => $this->input->post('description'),
 						'creditforthree' => $this->input->post('creditforthree'),
 						'creditforsix' => $this->input->post('creditforsix'),

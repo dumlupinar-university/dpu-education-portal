@@ -22,8 +22,9 @@ class VerifyRegister extends CI_Controller {
 	
 		if( $this->form_validation->run() == FALSE )
 		{
+			$data['status'] = 4;
 			$this->load->view('header');
-			$this->load->view('menu');
+			$this->load->view('menu',$data);
 			$this->load->view('content_register');
 			$this->load->view('footer');
 		}
@@ -36,8 +37,9 @@ class VerifyRegister extends CI_Controller {
 	
 	public function successfull($data)
 	{
+		$data['status'] = 4;
 		$this->load->view('header');
-		$this->load->view('menu');
+		$this->load->view('menu',$data);
 		$this->load->view('content_register_successfull',$data);
 		$this->load->view('footer');
 	}

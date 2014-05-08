@@ -106,6 +106,7 @@ class Course extends CI_Controller {
 		$this->load->model('course_model','',TRUE);
 		
 		$courseDetails['results'] = $this->course_model->get_course($id);
+		$courseDetails['nonresults'] = $this->course_model->get_course_not_confirmed($id);
 		$this->load->view('header');
 		
 		if( $this->session->userdata('logged_in') )
@@ -119,8 +120,10 @@ class Course extends CI_Controller {
 			
 			$now = date('Y-m-d H:i:s', now());
 			
+			$courseDetails['courseId'] = $id;
 			$courseDetails['status'] = $this->course_model->check_status($id,$data['id'],$now);
 			$courseDetails['prizes'] = $this->course_model->get_course_prizes($id);
+			$courseDetails['comments'] = $this->course_model->get_course_comments($id);
 			
 			if ( $data['authority'] == 0 )
 			{
@@ -172,6 +175,7 @@ class Course extends CI_Controller {
 			$data['id'] = $session_data['id'];
 			
 			$data['results'] = $this->course_model->get_teacher_course_list($data['id']);
+			$data['nonresults'] = $this->course_model->get_teacher_course_list_not_confirmed($data['id']);
 			
 			if ( $data['authority'] == 0 )
 			{

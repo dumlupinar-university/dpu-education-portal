@@ -18,9 +18,10 @@ class VerifyLogin extends CI_Controller {
 
 		if( $this->form_validation->run() == FALSE )
 		{
+			$data['status'] = 4;
 			//Field validation failed.&nbsp; User redirected to login page
 			$this->load->view('header');
-			$this->load->view('menu');
+			$this->load->view('menu',$data);
 			$this->load->view('content_login');
 			$this->load->view('footer');
 		}
