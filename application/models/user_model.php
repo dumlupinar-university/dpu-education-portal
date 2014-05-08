@@ -2,6 +2,12 @@
 
 class User_Model extends CI_Model {
 	
+	
+	function become_admin($cv)
+	{
+		$this->db->inser('becomeadmin',$cv);
+	}
+	
 	function login($email, $password)
 	{
 		$this->db->select('id, name, surname, authority');

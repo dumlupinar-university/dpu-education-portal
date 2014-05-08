@@ -7,6 +7,14 @@
 		<?php echo validation_errors(); ?>
 		<?php echo form_open('verifyteacher'); ?>
 			<table>
+				bla
+				bla
+				bla
+				bla
+				<tr>
+					<td><input type="checkbox" name="terms" id="terms"></td>
+					<td>:<label for="terms"> I Agree Terms And Rights</label></td>
+				</tr>
 				<tr>
 					<td><label for="cv">Cv</label></td>
 					<td>:<input type="file" id="cv" name="cv"/></td>
