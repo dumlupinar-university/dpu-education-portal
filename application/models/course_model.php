@@ -46,6 +46,21 @@ class Course_model extends CI_Model {
 		
 	}
 	
+	function get_course_point_of_user($id,$userid)
+	{
+		$this->db->select('coursespoints.point');
+		$this->db->from('coursespoints');
+		$this->db->where('coursespoints.user',$userid);
+		$this->db->where('coursespoints.course',$id);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() == 1 )
+		{
+			return $query->row()->point;
+		}
+	}
+	
 	
 	function get_full_course_list()
 	{
@@ -173,6 +188,54 @@ class Course_model extends CI_Model {
 		{
 			return false;
 		}
+	}
+	
+	function update_rate($data)
+	{
+		$points = array (
+			'user' => $data['id'],
+			'course' => $data['course'],
+			'point' => $data['point']
+		);
+		
+		$this->db->select('*');
+		$this->db->from('coursespoints');
+		$this->db->where('coursespoints.course',$course);
+		$this->db->where('coursespoints.id',$id);
+		
+		$this->db->update('coursespoints',$points);
+	}
+	
+	function check_rate($id,$course)
+	{
+		$this->db->select('*');
+		$this->db->from('coursespoints');
+		$this->db->where('coursespoints.course',$course);
+		$this->db->where('coursespoints.id',$id);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() == 1 )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	function rate($data)
+	{
+		
+		$points = array (
+			'user' => $data['id'],
+			'course' => $data['course'],
+			'point' => $data['point']
+		);
+		
+		$this->db->insert('coursespoints',$points);
+		
 	}
 	
 	function get_purchased_list($id,$now)

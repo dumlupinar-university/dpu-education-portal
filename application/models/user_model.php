@@ -5,7 +5,7 @@ class User_Model extends CI_Model {
 	
 	function become_admin($cv)
 	{
-		$this->db->inser('becomeadmin',$cv);
+		$this->db->insert('becomeadmin',$cv);
 	}
 	
 	function login($email, $password)

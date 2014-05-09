@@ -22,10 +22,6 @@
 					
 			<p>It is easy as long as sign-up to have this advantageous.</p>
 					
-			<p>If you are still searching for register button just <strong><a href='.site_url('register').'>Click Here</a></strong> :) !!</p>
-
-			<p>If you are a member just <strong><a href='.site_url('login').'>Click Here</a></strong> to Login :) ..</p>
-			
 			<p id="btns">
 				<a href='.site_url('login').'><img src="'.base_url().'assets/design/btn-login.gif" alt="" /></a>
 				<a href='.site_url('register').'><img src="'.base_url().'assets/design/btn-register.gif" alt="" /></a>

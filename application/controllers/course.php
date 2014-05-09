@@ -100,6 +100,7 @@ class Course extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	
 	public function get_course($id)
 	{
 		$this->load->helper('date');
@@ -124,6 +125,7 @@ class Course extends CI_Controller {
 			$courseDetails['status'] = $this->course_model->check_status($id,$data['id'],$now);
 			$courseDetails['prizes'] = $this->course_model->get_course_prizes($id);
 			$courseDetails['comments'] = $this->course_model->get_course_comments($id);
+			$courseDetails['pointofuser'] = $this->course_model->get_course_point_of_user($id,$data['id']);
 			
 			if ( $data['authority'] == 0 )
 			{

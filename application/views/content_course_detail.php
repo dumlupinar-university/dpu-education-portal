@@ -23,6 +23,20 @@
 		
 		echo '<p><b>Last Update</b>		: '.$row->updateddateI.'</p>';
 		
+		
+		if ( $status == 2 )
+		{
+			if ( !empty($pointofuser) )
+			{
+				echo '<p><b>You have rated the course with </b> : '.$pointofuser.' <b>points</b></p>';
+			}
+			else
+			{
+				echo '<p><b>You have not rated the course yet</b></p>';
+			}
+		}
+		
+		
 			
 			if ( $status == 3 )
 			{
