@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 03, 2014 at 01:12 AM
+-- Generation Time: May 09, 2014 at 02:40 PM
 -- Server version: 5.1.70-log
 -- PHP Version: 5.5.10-pl0-gentoo
 
@@ -19,6 +19,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `CI_Education_Portal`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `becomeadmin`
+--
+
+CREATE TABLE IF NOT EXISTS `becomeadmin` (
+  `user` int(11) NOT NULL,
+  `cv` varchar(255) NOT NULL,
+  UNIQUE KEY `user` (`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -44,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `buyingscreditslogs` (
 
 CREATE TABLE IF NOT EXISTS `coursecomments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `comment` text NOT NULL,
   `course` int(11) NOT NULL,
   `user` int(11) NOT NULL,
   `date` timestamp NULL DEFAULT NULL,
@@ -67,26 +80,27 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `status` int(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `teacher` (`teacher`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `courses`
 --
 
 INSERT INTO `courses` (`id`, `name`, `teacher`, `picture`, `status`) VALUES
-(1, 'C', 3, 'resim34.png', 1),
-(2, 'C++', 3, 'resim38.png', 0),
-(3, 'Pyhton', 7, 'abc.png', 0),
-(4, 'Java', 7, 'mat.png', 0),
-(5, 'PHP', 3, 'burbir', 0),
-(6, 'AutoCAD', 7, 'bende', 0),
-(7, 'Spanish', 3, 'oldu.png', 0),
-(8, 'Machine Learning', 8, 'maclearnpic.png', 0),
-(10, 'css', 9, 'indir.jpg', 0),
+(1, 'C', 3, 'c.jpg', 1),
+(2, 'C++', 3, 'c++.jpg', 1),
+(3, 'Pyhton', 7, 'python.jpg', 1),
+(4, 'Java', 7, 'java.jpg', 1),
+(5, 'PHP', 3, 'php.jpg', 1),
+(6, 'AutoCAD', 7, 'bende', 1),
+(7, 'Spanish', 3, 'oldu.png', 1),
+(8, 'Machine Learning', 8, 'maclearnpic.png', 1),
+(10, 'css', 9, 'indir.jpg', 1),
 (11, 'css2', 9, '0', 0),
 (12, 'css3', 9, 'indir.jpg', 0),
 (13, 'css4', 9, '9jpg', 0),
-(14, 'css5', 9, '9.jpg', 0);
+(14, 'css5', 9, '9.jpg', 0),
+(15, 'Deniz', 20, 'Deniz_thumb.gif', 0);
 
 -- --------------------------------------------------------
 
@@ -120,7 +134,8 @@ INSERT INTO `coursescredits` (`course`, `creditforthree`, `creditforsix`, `credi
 (11, 3, 4, 5, '2014-05-02 19:20:07'),
 (12, 3, 4, 5, '2014-05-02 19:21:45'),
 (13, 3, 4, 5, '2014-05-02 19:24:17'),
-(14, 3, 4, 5, '2014-05-02 19:27:44');
+(14, 3, 4, 5, '2014-05-02 19:27:44'),
+(15, 4, 1, 5, '2014-05-08 17:15:58');
 
 -- --------------------------------------------------------
 
@@ -144,16 +159,17 @@ INSERT INTO `coursesinfos` (`course`, `description`, `createddate`, `updateddate
 (1, 'This course provides all the informations to write C code', '2014-04-13 21:00:00', '2014-04-29 20:13:37'),
 (2, 'This course provides all the informations to write C++ code\n\nPre requierements\nUnderstanding C programming Language', '2014-04-14 21:00:00', '2014-04-29 20:13:37'),
 (3, 'This is a new age of PYTHONNN \n\nMaybe the best scripting and programming Language', '2014-04-15 21:00:00', '2014-04-29 20:15:09'),
-(4, 'This is the new generation of the programming Languages. It is a platform indepented architecture..', '2014-04-24 21:00:00', '2014-04-29 20:15:09'),
-(5, 'This is a internet programming lanuage. Todays most popular language is PHP  !', '2014-04-26 21:00:00', '2014-04-29 20:21:25'),
-(6, 'AutoCad is so important for animation', '2014-04-27 21:00:00', '2014-04-29 20:21:25'),
+(4, 'This is the new generation of the programming Languages. It is a platform indepented architecture.. So learn it', '2014-04-24 21:00:00', '2014-04-29 20:15:09'),
+(5, 'This is a internet programming lanuage. Todays most popular language is PHP  ! This web site is also coded with PHP by using Codeigniter framework which is to popular in these days.', '2014-04-26 21:00:00', '2014-04-29 20:21:25'),
+(6, 'AutoCad is so important for animation and after this days users of autocad will drastically increase its importance.. In this perspective we can commonly advice you to buy this course', '2014-04-27 21:00:00', '2014-04-29 20:21:25'),
 (7, 'This course aims to teach how to speak spanish better with a native speaker', '0000-00-00 00:00:00', '2014-04-23 07:02:51'),
 (8, 'This course provide all documentations for machine Learning', '0000-00-00 00:00:00', '2014-04-29 18:43:13'),
 (10, 'sdfsdfsdf', '0000-00-00 00:00:00', '2014-05-02 19:05:23'),
 (11, '', '0000-00-00 00:00:00', '2014-05-02 19:20:07'),
 (12, 'sdaffa', '0000-00-00 00:00:00', '2014-05-02 19:21:45'),
 (13, 'adsfasdfsdf', '0000-00-00 00:00:00', '2014-05-02 19:24:17'),
-(14, 'daf', '0000-00-00 00:00:00', '2014-05-02 19:27:44');
+(14, 'daf', '0000-00-00 00:00:00', '2014-05-02 19:27:44'),
+(15, 'asdadad', '0000-00-00 00:00:00', '2014-05-08 17:15:58');
 
 -- --------------------------------------------------------
 
@@ -186,22 +202,23 @@ CREATE TABLE IF NOT EXISTS `lectures` (
   `description` text,
   PRIMARY KEY (`id`),
   KEY `course` (`course`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `lectures`
 --
 
 INSERT INTO `lectures` (`id`, `course`, `name`, `key`, `status`, `createddate`, `updateddate`, `description`) VALUES
-(1, 4, 'giris video1', '', 0, NULL, '0000-00-00 00:00:00', 'bu giris videosudur'),
-(2, 5, 'giris video 2', '', 0, NULL, '0000-00-00 00:00:00', 'bu giris videosudur'),
+(1, 4, 'giris video1', '', 1, NULL, '0000-00-00 00:00:00', 'bu giris videosudur'),
+(2, 5, 'giris video 2', '', 1, NULL, '0000-00-00 00:00:00', 'bu giris videosudur'),
 (3, 1, '0', '', 0, '2014-05-12 21:00:00', '0000-00-00 00:00:00', NULL),
 (4, 1, 'furkan', 'oEic86pFMA9DxQ2G.', 0, NULL, '2014-05-02 23:41:15', 'deneme videosu'),
 (5, 1, 'ikinci', 'Rrgdc01nWdgRptha.', 0, NULL, '2014-05-02 23:41:51', 'deenme iki'),
 (6, 1, 'ucuncu', 'cEgzWvSGLSjRQAeP.mp4', 0, NULL, '2014-05-02 23:42:41', 'ucuncu deneme'),
 (7, 1, 'dorduncu demee', 'pAcmgDBDNFcXMfGz.mp4', 0, NULL, '2014-05-02 23:44:53', 'sondeneme'),
 (8, 1, 'derse giris', '20140128_111137.mp4', 0, NULL, '2014-05-02 23:49:19', 'basliyoruz'),
-(9, 1, 'artıkyeterrrrr', '9BYKqB0pSvjX99Hk.mp4', 0, NULL, '2014-05-03 00:13:12', 'yeterr');
+(9, 1, 'artıkyeterrrrr', '9BYKqB0pSvjX99Hk.mp4', 1, NULL, '2014-05-03 00:13:12', 'yeterr'),
+(10, 15, 'deniz', 'NnXrckl1W4ThbW2p.MP4', 0, NULL, '2014-05-08 17:23:25', 'werwrwre');
 
 -- --------------------------------------------------------
 
@@ -281,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `authority` int(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `users`
@@ -297,7 +314,9 @@ INSERT INTO `users` (`id`, `email`, `password`, `name`, `surname`, `authority`) 
 (7, 'mervesozer@gmail.com', 'e2c12942c11f3de5c965610c2fb75eda', 'Merve', 'Sözer', 2),
 (8, 'tugayozturk@gmail.com', 'f8358d4d3fcf2f824a49926fff7989ed', 'Tugay', 'Öztürk', 2),
 (9, 'oktayaydin@outlook.com.tr', 'eea0f105e38ae7cd6e124054d64cee9e', 'oktay', 'aydın', 2),
-(14, 'oktaaydin6464@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'oktay', 'aydın', 0);
+(14, 'oktaaydin6464@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'oktay', 'aydın', 0),
+(19, 'abdurrahman@gmail.com', '9554b3493f4e047ae573be26b9b21a0b', 'Abdurrahman', 'Doruk', 0),
+(20, 'denizcetin@outlook.com.tr', '202cb962ac59075b964b07152d234b70', 'deniz', 'çetin', 2);
 
 -- --------------------------------------------------------
 
@@ -316,6 +335,8 @@ CREATE TABLE IF NOT EXISTS `usersactivationcodes` (
 --
 
 INSERT INTO `usersactivationcodes` (`email`, `activation_code`) VALUES
+('abdurrahman@gmail.com', 'duUIfB4vzQDvka0m'),
+('denizcetin@outlook.com.tr', 'kwIy7HlKvOhVywdT'),
 ('oktaaydin6464@gmail.com', 'jFJxD9FjXdSxW5GE');
 
 -- --------------------------------------------------------
@@ -338,8 +359,15 @@ CREATE TABLE IF NOT EXISTS `userscourses` (
 --
 
 INSERT INTO `userscourses` (`user`, `course`, `buyingdate`, `validate`) VALUES
-(4, 4, '2014-04-26 22:35:59', '0000-00-00 00:00:00'),
-(3, 5, '2014-04-26 22:35:59', '0000-00-00 00:00:00');
+(2, 7, '2014-05-05 21:06:03', '2015-05-05 21:06:03'),
+(3, 8, '2014-05-05 21:13:18', '2014-11-05 22:13:18'),
+(4, 5, '2014-05-06 04:16:56', '2014-08-06 04:16:56'),
+(4, 1, '2014-05-07 15:05:31', '2014-11-07 16:05:31'),
+(3, 3, '2014-05-07 20:06:38', '2014-08-07 20:06:38'),
+(3, 4, '2014-05-07 20:07:23', '2014-08-07 20:07:23'),
+(3, 5, '2014-05-07 23:22:48', '2014-05-05 21:00:00'),
+(3, 6, '2014-05-07 23:23:51', '2014-05-03 21:00:00'),
+(4, 15, '2014-05-08 14:32:19', '2014-08-08 14:32:19');
 
 -- --------------------------------------------------------
 
@@ -354,6 +382,17 @@ CREATE TABLE IF NOT EXISTS `userscredits` (
   UNIQUE KEY `user_2` (`user`),
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `userscredits`
+--
+
+INSERT INTO `userscredits` (`user`, `credit`, `creditlastchangedate`) VALUES
+(2, 9986, '2014-05-05 21:06:03'),
+(3, 944, '2014-05-07 20:07:23'),
+(4, 4985, '2014-05-08 14:32:19'),
+(19, 0, '2014-05-08 15:52:53'),
+(20, 0, '2014-05-08 17:04:59');
 
 -- --------------------------------------------------------
 
@@ -374,6 +413,18 @@ CREATE TABLE IF NOT EXISTS `usersinfos` (
   UNIQUE KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `usersinfos`
+--
+
+INSERT INTO `usersinfos` (`user`, `phone`, `skype`, `facebook`, `birthday`, `address`, `photo`, `cv`, `description`) VALUES
+(1, NULL, 'furkanayar', NULL, NULL, NULL, NULL, NULL, NULL),
+(2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, '9090909090', 'skyekrem', 'facekrem', '0000-00-00 00:00:00', 'bu bir address', '3.jpg', '3.jpg', 'bu bir description'),
+(4, '9090590909', 'barismercan', 'facebook/mercan.baris', '2014-05-15 00:00:00', 'kutlukent sitesi', 'bubirresim', 'resumeisebu', 'cok kıvır kıvır bir delikanlıyım'),
+(19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(20, '12314152123123', 'http://192.168.1.9/CIEducationPortal/index.php/hom', 'http://192.168.1.9/CIEducationPortal/index.php/hom', '0000-00-00 00:00:00', 'asdawsdasda', '20_thumb.gif', '20.gif', 'dsqawqdqwd');
+
 -- --------------------------------------------------------
 
 --
@@ -390,6 +441,12 @@ CREATE TABLE IF NOT EXISTS `userslogins` (
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `becomeadmin`
+--
+ALTER TABLE `becomeadmin`
+  ADD CONSTRAINT `becomeadmin_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `buyingscreditslogs`
