@@ -209,6 +209,33 @@ class Lecture_model extends CI_Model {
 		$this->db->update('lectures',array('status'=>0));
 	}
 	
+	function get_unconfirmed_lecture_list($id)
+	{
+		$this->db->select('id,authority');
+		$this->db->from('users');
+		$this->db->where('id',$id);
+		$this->db->where('authority',3);
+				
+		$query = $this->db->get();
+				
+		if ( $query->num_rows() == 1 )
+		{
+			$this->db->select('L.id AS idL, L.name AS nameL, L.course , L.description, L.key,
+								C.name AS nameC, C.id AS idC');
+			$this->db->from('lectures AS L');
+			$this->db->join('courses AS C','L.course = C.id','INNER'); 
+			$this->db->where('L.status',0);
+					
+			$query = $this->db->get();
+				
+			if( $query->num_rows() > 0 )
+			{
+				return $query->result();
+			}
+	
+		}
+	}
+	
 	
 	function get_lecture_status($course,$userid)
 	{

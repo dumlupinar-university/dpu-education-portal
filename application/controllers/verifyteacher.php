@@ -16,7 +16,7 @@ class VerifyTeacher extends CI_Controller {
 		$this->load->library('form_validation');
  
 		$this->form_validation->set_rules('terms', 'Terms', 'required');
-		$this->form_validation->set_rules('cv', 'Cv', 'required|xss_clean|callback_cv_upload');
+		$this->form_validation->set_rules('cv', 'Cv', 'xss_clean|callback_cv_upload');
 		
 
 		if( $this->form_validation->run() == FALSE )
@@ -36,14 +36,14 @@ class VerifyTeacher extends CI_Controller {
 	
 	function add_to_database($data)
 	{
-		$cvName = exploade('.',$_FILES['cv']['name']);
+		$cvName = explode('.',$_FILES['cv']['name']);
 		
 		$cv = array(
 				'user' => $data['id'],
 				'cv' => $data['id'].'.'.$cvName[1]		
 		);
 		
-		$this->user_model->become_admin($cv);
+		$this->user_model->become_teacher($cv);
 		$this->successfull($data);
 	}
 	
@@ -104,7 +104,7 @@ class VerifyTeacher extends CI_Controller {
 			$data['status'] = 1;
 			$this->load->view('header');
 			$this->load->view('menu',$data);
-			$this->load->view('content_become_teacher_succesfull');
+			$this->load->view('content_become_teacher_successfull');
 			$this->load->view('footer');
 	}
 

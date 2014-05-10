@@ -5,7 +5,7 @@
 	<center>
 		<h2>Become A Teacher</h2>
 		<?php echo validation_errors(); ?>
-		<?php echo form_open('verifyteacher'); ?>
+		<?php echo form_open_multipart('verifyteacher'); ?>
 			<table>
 				bla
 				bla

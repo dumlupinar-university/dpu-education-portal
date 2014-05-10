@@ -509,6 +509,36 @@ class Course_model extends CI_Model {
 		
 	}
 	
+	function get_unconfirmed_course_list($id)
+	{
+		$this->db->select('id,authority');
+		$this->db->from('users');
+		$this->db->where('id',$id);
+		$this->db->where('authority',3);
+				
+		$query = $this->db->get();
+				
+		if ( $query->num_rows() == 1 )
+		{
+			$this->db->select('C.id AS idC, C.name AS nameC, C.teacher, C.picture ,
+						   U.id AS idU, U.name AS nameU, U.surname,
+						   L.description');
+			$this->db->from('courses AS C');
+			$this->db->join('users AS U','U.id = C.teacher','INNER');
+			$this->db->join('coursesinfos AS L','L.course = C.id','INNER');
+			$this->db->where('C.status',0);
+		
+			$query = $this->db->get();
+		
+			if( $query->num_rows() > 0 )
+			{
+				return $query->result();
+			}
+	
+		}
+	}
+	
+	
 	function activate($id)
 	{
 		$this->db->select('*');

@@ -3,9 +3,88 @@
 class User_Model extends CI_Model {
 	
 	
-	function become_admin($cv)
+	function become_teacher($cv)
 	{
-		$this->db->insert('becomeadmin',$cv);
+		$this->db->insert('becometeacher',$cv);
+	}
+	
+	function activate_teacher($id)
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('id',$id);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() == 1 )
+		{
+			$this->db->where('id',$id);
+			$this->db->update('users',array('authority'=>2));
+		}
+		
+		$this->db->select('*');
+		$this->db->from('becometeacher');
+		$this->db->where('user',$id);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() == 1 )
+		{
+			$this->db->where('user',$id);
+			$this->db->update('becometeacher',array('status'=>1));
+		}
+	}
+	
+	function deactivate_teacher($id)
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('id',$id);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() == 1 )
+		{
+			$this->db->where('id',$id);
+			$this->db->update('users',array('authority'=>1));
+		}
+		
+		$this->db->select('*');
+		$this->db->from('becometeacher');
+		$this->db->where('user',$id);
+		
+		$query = $this->db->get();
+		
+		if ( $query->num_rows() == 1 )
+		{
+			$this->db->where('user',$id);
+			$this->db->update('becometeacher',array('status'=>0));
+		}
+	}
+	
+	function get_unconfirmed_teacher_list($id)
+	{
+		$this->db->select('id,authority');
+		$this->db->from('users');
+		$this->db->where('id',$id);
+		$this->db->where('authority',3);
+				
+		$query = $this->db->get();
+				
+		if ( $query->num_rows() == 1 )
+		{
+			$this->db->select('*');
+			$this->db->from('becometeacher');
+			$this->db->where('status',0);
+		
+			$query = $this->db->get();
+		
+			if( $query->num_rows() > 0 )
+			{
+				return $query->result();
+			}
+	
+		}
 	}
 	
 	function login($email, $password)

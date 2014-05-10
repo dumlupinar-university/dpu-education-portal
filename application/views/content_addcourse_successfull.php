@@ -11,7 +11,7 @@
 	<h2>Credit For Six   :<?php echo $creditforsix; ?></h1>
 	<h2>Credit For Year   :<?php echo $creditforyear; ?></h1>
 
-	<a href="<?php site_url('course')?>">Click Here for listing Courses</a>
+	<a href="<?php echo site_url('course');?>">Click Here for listing Courses</a>
 </div>
 </div>
 
