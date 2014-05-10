@@ -23,7 +23,7 @@
 				<td>'.$surname.'</td>
 				<td>'.$email.'</td>
 				<td>'.$authority.'</td>
-				<td><a href='.site_url('user/get_user/'.$id.'').'>Details</a></td>
+				<td><a href='.site_url('user/get_user/'.$id.'').'><img src="'.base_url().'assets/design/btn-details.gif" alt="" /></a></td>
 				</tr>';
 	
 	}
