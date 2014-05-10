@@ -24,7 +24,7 @@
 		echo '<p><b>Last Update</b>		: '.$row->updateddateI.'</p>';
 		
 		
-		if ( $status == 2 )
+		if ( $lecstatus == 2 )
 		{
 			if ( !empty($pointofuser) )
 			{
@@ -38,19 +38,19 @@
 		
 		
 			
-			if ( $status == 3 )
+			if ( $lecstatus == 3 || $status == 3)
 			{
 				echo '<p><b><a href='.site_url('lecture/get_lecture_list/'.$row->id.'').'><img src="'.base_url().'assets/design/btn-gotolectures.gif" alt="" /></a></p></b>';
 			}
-			else if ( $status == 2 )
+			else if ( $lecstatus == 2 )
 			{
 				echo '<p><b><a href='.site_url('lecture/get_lecture_list/'.$row->id.'').'><img src="'.base_url().'assets/design/btn-gotolectures.gif" alt="" /></a></p></b>';
 			}
-			else if ( $status == 4 )
+			else if ( $lecstatus == 4 )
 			{
 				echo '<p><b><a href='.site_url('login').'><img src="'.base_url().'assets/design/btn-login.gif" alt="" /></a></b></p>';
 			}
-			else if ( $status == 1 )
+			else if ( $lecstatus == 1 || $status == 3)
 			{
 				if ( !empty($prizes) )
 				{
@@ -63,10 +63,26 @@
 				}
 			}
 		
+		if ( $status == 3 )
+		{
+			echo '<p><a href='.site_url('manage/course_list/').'><img src="'.base_url().'assets/design/btn-back.gif" alt="" /></a></p>';
+			
+			if ( $row->status == 1 )
+			{
+				echo '<p><a href='.site_url('manage/deactivate_course/'.$id.'').'><img src="'.base_url().'assets/design/btn-delete.gif" alt="" /></a></p>';
+			}
+			else
+			{
+				echo '<p><a href='.site_url('manage/activate_course/'.$id.'').'><img src="'.base_url().'assets/design/btn-confirm.gif" alt="" /></a></p>';
+			}
+		}
+		
 		}
 	}
 	
-	if ( $status == 3 )
+	
+	
+	if ( $lecstatus == 3 )
 	{
 	
 		if ( !empty($nonresults) )
@@ -88,7 +104,7 @@
 				echo '<p><b>Last Update</b>		: '.$row->updateddateI.'</p>';
 			
 				
-				if ( $status == 3 )
+				if ( $lecstatus == 3 )
 				{
 					echo '<p><b><a href='.site_url('lecture/get_lecture_list/'.$row->id.'').'><img src="'.base_url().'assets/design/btn-gotolectures.gif" alt="" /></a></p></b>';
 				}
@@ -118,10 +134,12 @@
 		
 	}
 	
-	if ( $status == 2 || $status == 3 )
+	if ( $lecstatus == 2 || $lecstatus == 3 )
 	{
 		echo '<p><b><a href='.site_url('course/add_comment/'.$courseId.'').'><img src="'.base_url().'assets/design/btn-addcomment.gif" alt="" /></a></b></p>';
 	}
+
+
 
 ?>
 

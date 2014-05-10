@@ -265,9 +265,9 @@ class Course_model extends CI_Model {
 	
 	
 	
-	function get_course($id)
+	function get_course($id,$userid)
 	{
-		$this->db->select('C.id, C.picture, C.name nameC, 
+		$this->db->select('C.id, C.picture, C.name nameC , C.status , 
 							U.name nameU, U.surname, U.id idU, 
 							I.description, I.updateddate updateddateI, I.createddate,
 							L.creditforthree, L.creditforsix, L.creditforyear, L.updateddate updateddateL');
@@ -286,6 +286,38 @@ class Course_model extends CI_Model {
 		}
 		else
 		{
+			$this->db->select('id,authority');
+			$this->db->from('users');
+			$this->db->where('id',$userid);
+			$this->db->where('authority',3);
+				
+			$query = $this->db->get();
+			
+			if ( $query->num_rows() == 1 )
+			{
+				$this->db->select('C.id, C.picture, C.name nameC ,C.status , 
+							U.name nameU, U.surname, U.id idU, 
+							I.description, I.updateddate updateddateI, I.createddate,
+							L.creditforthree, L.creditforsix, L.creditforyear, L.updateddate updateddateL');
+				$this->db->from('courses AS C');
+				$this->db->join('users AS U','C.teacher = U.id','INNER');
+				$this->db->join('coursesinfos AS I','I.course = C.id','INNER');
+				$this->db->join('coursescredits AS L','L.course = C.id' ,'INNER');
+				$this->db->where('C.id',$id);
+		
+				$query = $this->db->get();
+
+				if( $query->num_rows() == 1 )
+				{
+					return $query->result();
+				}
+				else
+				{
+					return false;
+				}
+		
+			}
+			
 			return false;
 		}
 	}
@@ -475,6 +507,22 @@ class Course_model extends CI_Model {
 		}
 		
 		
+	}
+	
+	function activate($id)
+	{
+		$this->db->select('*');
+		$this->db->from('courses');
+		$this->db->where('id',$id);
+		$this->db->update('courses',array('status'=>1));
+	}
+	
+	function deactivate($id)
+	{
+		$this->db->select('*');
+		$this->db->from('courses');
+		$this->db->where('id',$id);
+		$this->db->update('courses',array('status'=>0));
 	}
 	
 	function buy_course_now($data)

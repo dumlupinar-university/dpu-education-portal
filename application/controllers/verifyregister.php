@@ -99,10 +99,10 @@ class VerifyRegister extends CI_Controller {
 		$config['crlf'] = "\r\n"; 
 		
 		$this->email->initialize($config); 
-		$this->email->from('Halil@tamtertarti.com'); 
+		$this->email->from('admin@dpu-education-portal.com'); 
 		$this->email->to($email); 
 		$this->email->subject("Activate Your Account"); 
-		$this->email->message("Dear ".$name." Please click to link to activate your account:\n\n <a href=".base_url()."user/activate/".$email."/".$code."/0".">Click To Activate</a>"); 
+		$this->email->message("Dear ".$name." Please click to link to activate your account:\n\n <a href=".site_url().('user/activate/'.$email.'/'.$code.'').">Click To Activate</a>"); 
 		
 		if( $this->email->send() ) 
 		{

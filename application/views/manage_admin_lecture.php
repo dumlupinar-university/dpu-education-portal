@@ -25,8 +25,18 @@
 				<td>'.$description.'</td>
 				<td>'.$key.'</td>
 				<td>'.$status.'</td>
-				<td><a href='.site_url('lecture/get_lecture/'.$id.'').'>Details</a></td>
-				</tr>';
+				<td><a href='.site_url('lecture/get_lecture/'.$id.'').'><img src="'.base_url().'assets/design/btn-details.gif" alt="" /></a></td>';
+				
+				if ( $status == 1 )
+				{
+					echo '<td><a href='.site_url('manage/deactivate_lecture/'.$id.'').'><img src="'.base_url().'assets/design/btn-delete.gif" alt="" /></a></td>';
+				}
+				else
+				{
+					echo '<td><a href='.site_url('manage/activate_lecture/'.$id.'').'><img src="'.base_url().'assets/design/btn-confirm.gif" alt="" /></a></td>';
+				}
+				
+				echo '</tr>';
 	
 	}
 

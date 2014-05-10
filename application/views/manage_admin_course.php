@@ -23,8 +23,16 @@
 				<td>'.$name.'</td>
 				<td><a href='.site_url('user/get_teacher/'.$teacherid.'').'>'.$teacher.''.$teacherSurname.'</td>
 				<td>'.$status.'</td>
-				<td><a href='.site_url('course/get_course/'.$id.'').'>Details</a></td>
-				</tr>';
+				<td><a href='.site_url('course/get_course/'.$id.'').'>Details</a></td>';
+				if ( $status == 1 )
+				{
+					echo '<td><a href='.site_url('manage/deactivate_course/'.$id.'').'><img src="'.base_url().'assets/design/btn-delete.gif" alt="" /></a></td>';
+				}
+				else
+				{
+					echo '<td><a href='.site_url('manage/activate_course/'.$id.'').'><img src="'.base_url().'assets/design/btn-confirm.gif" alt="" /></a></td>';
+				}
+				echo '</tr>';
 	
 	}
 

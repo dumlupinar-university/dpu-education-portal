@@ -50,7 +50,31 @@ class Lecture_model extends CI_Model {
 			{
 				return $query->result();
 			}
-
+			else
+			{
+				$this->db->select('id,authority');
+				$this->db->from('users');
+				$this->db->where('id',$id);
+				$this->db->where('authority',3);
+				
+				$query = $this->db->get();
+				
+				if ( $query->num_rows() == 1 )
+				{
+					$this->db->select('L.id, L.name, L.course , L.description');
+					$this->db->from('lectures AS L');
+					$this->db->join('courses','L.course = courses.id','INNER'); 
+					$this->db->where('courses.id',$course);
+					
+					$query = $this->db->get();
+					
+					if( $query->num_rows() > 0 )
+					{
+						return $query->result();
+					}
+	
+				}
+			}
 		}
 	}
 	
@@ -99,7 +123,6 @@ class Lecture_model extends CI_Model {
 			$this->db->where('L.id',$lectureid);
 			$this->db->where('C.teacher',$id);
 			
-			
 			$query = $this->db->get();
 			
 			if( $query->num_rows() == 1 )
@@ -109,7 +132,37 @@ class Lecture_model extends CI_Model {
 			}
 			else
 			{
-				return false;
+				$this->db->select('id,authority');
+				$this->db->from('users');
+				$this->db->where('id',$id);
+				$this->db->where('authority',3);
+				
+				$query = $this->db->get();
+				
+				if ( $query->num_rows() == 1 )
+				{
+					$this->db->select('L.id AS idL, L.name AS nameL, L.course , L.description , L.key , L.status,
+									C.name AS nameC ,C.id AS idC');
+					$this->db->from('lectures AS L');
+					$this->db->join('courses AS C','C.id = L.course','INNER'); 
+					$this->db->where('L.id',$lectureid);
+					
+					$query = $this->db->get();
+					
+					if( $query->num_rows() == 1 )
+					{	
+						$row = $query->row();
+						return $row;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				else
+				{
+					return false;
+				}
 			}
 		}
 	}
@@ -138,6 +191,22 @@ class Lecture_model extends CI_Model {
 	function add_lecture($data)
 	{
 		$this->db->insert('lectures',$data);
+	}
+	
+	function activate($id)
+	{
+		$this->db->select('*');
+		$this->db->from('lectures');
+		$this->db->where('id',$id);
+		$this->db->update('lectures',array('status'=>1));
+	}
+	
+	function deactivate($id)
+	{
+		$this->db->select('*');
+		$this->db->from('lectures');
+		$this->db->where('id',$id);
+		$this->db->update('lectures',array('status'=>0));
 	}
 	
 	

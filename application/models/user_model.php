@@ -200,8 +200,7 @@ class User_Model extends CI_Model {
 		$this->db->select('A.activation_code, A.email, 
 							U.authority, U.email');
 		$this->db->from('usersactivationcodes AS A');
-		$this->db->from('users AS U');
-		$this->db->join('users','A.email = U.email','INNER');
+		$this->db->join('users AS U','A.email = U.email','INNER');
 		$this->db->where('A.email',$email);
 		$this->db->where('A.activation_code',$code);
 		$this->db->where('U.authority',0);

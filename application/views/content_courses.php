@@ -3,7 +3,7 @@
 <div id="lastest-post">
 <?php
 
-	echo '<h2><em>Courses</em></h2>';
+	echo '<h2><em>'.$header.'</em></h2>';
 	
 	if ( !empty($results) )
 	{

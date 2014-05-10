@@ -16,9 +16,30 @@
 		echo '<center><video width="480" height="320" controls>
 				<source src='.base_url(). 'videos/' .$result->key.' type="video/mp4">
 			</video></center>';
+	
+	
+	
+	
+	if ( $status == 3 )
+	{
+		echo '<p><a href='.site_url('manage/lecture_list/').'><img src="'.base_url().'assets/design/btn-back.gif" alt="" /></a></p>';
+			
+		if ( $result->status == 1 )
+		{
+			echo '<p><a href='.site_url('manage/deactivate_lecture/'.$result->idL.'').'><img src="'.base_url().'assets/design/btn-delete.gif" alt="" /></a></p>';
+		}
+		else
+		{
+			echo '<p><a href='.site_url('manage/activate_lecture/'.$result->idL.'').'><img src="'.base_url().'assets/design/btn-confirm.gif" alt="" /></a></p>';
+		}
+		
+	}
+	else
+	{
+		echo '<p><a href='.site_url('lecture/get_lecture_list/'.$result->idC.'').'><img src="'.base_url().'assets/design/btn-back.gif" alt="" /></a></p>';
 	}
 	
-	echo '<p><a href='.site_url('lecture/get_lecture_list/'.$result->idC.'').'>Click Here To Go Back To Lectures</a></p>';
+	}
 	
 ?>
 
